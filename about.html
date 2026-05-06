@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>About — AMK Industry | Our Story & Mission</title>
+  <link rel="stylesheet" href="shared.css">
+  <link rel="icon" href="assets/logo.png">
+  <style>
+    /* MISSION */
+    .mission-sec {
+      padding: 80px 0;
+      background: var(--bg)
+    }
+
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center
+    }
+
+    .mission-img {
+      height: 440px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      position: relative
+    }
+
+    .mission-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover
+    }
+
+    .mission-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(227, 30, 36, .08), transparent)
+    }
+
+    .mission-quote {
+      font-family: var(--fd);
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: 2px;
+      line-height: 1.1;
+      margin: 24px 0;
+      color: var(--white)
+    }
+
+    .mission-quote span {
+      color: var(--red)
+    }
+
+    /* VALUES */
+    .values-sec {
+      padding: 80px 0;
+      background: var(--s1)
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 48px
+    }
+
+    .val-blk {
+      background: var(--s1);
+      padding: 36px 28px;
+      text-align: center;
+      transition: var(--tr)
+    }
+
+    .val-blk:hover {
+      background: var(--s2)
+    }
+
+    .val-ico {
+      font-size: 36px;
+      margin-bottom: 16px
+    }
+
+    .val-blk h4 {
+      font-family: var(--fh);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 8px
+    }
+
+    .val-blk p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    /* TEAM */
+    .team-sec {
+      padding: 80px 0;
+      background: var(--bg)
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px
+    }
+
+    .team-card {
+      background: var(--s1);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: var(--tr)
+    }
+
+    .team-card:hover {
+      border-color: rgba(227, 30, 36, .3);
+      transform: translateY(-4px)
+    }
+
+    .team-card .timg {
+      height: 200px;
+      background: linear-gradient(135deg, var(--s2), var(--s3));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 64px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .team-card .timg::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red), var(--yellow))
+    }
+
+    .team-card .tbd {
+      padding: 24px
+    }
+
+    .team-card .tbd h4 {
+      font-family: var(--fh);
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px
+    }
+
+    .team-card .tbd .role {
+      font-family: var(--fh);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 10px
+    }
+
+    .team-card .tbd p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    /* WHY US BAND */
+    .why-band {
+      padding: 80px 0;
+      background: var(--s1);
+      position: relative;
+      overflow: hidden
+    }
+
+    .why-band::before {
+      content: '';
+      position: absolute;
+      right: -100px;
+      top: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(245, 197, 24, .04), transparent 70%)
+    }
+
+    .why-big-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 48px
+    }
+
+    /* MILESTONE TIMELINE */
+    .timeline-sec {
+      padding: 80px 0;
+      background: var(--bg)
+    }
+
+    .timeline {
+      position: relative;
+      margin-top: 48px;
+      padding-left: 40px
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--red), var(--yellow))
+    }
+
+    .tl-item {
+      position: relative;
+      padding: 0 0 40px 32px
+    }
+
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--red);
+      border: 2px solid var(--bg)
+    }
+
+    .tl-year {
+      font-family: var(--fd);
+      font-size: 20px;
+      color: var(--yellow);
+      margin-bottom: 4px
+    }
+
+    .tl-item h4 {
+      font-family: var(--fh);
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px
+    }
+
+    .tl-item p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5
+    }
+
+    /* PARTNER LOGOS */
+    .partner-sec {
+      padding: 60px 0;
+      background: var(--s1);
+      border-top: 1px solid var(--border)
+    }
+
+    .partner-logos {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 32px
+    }
+
+    .plogo {
+      font-family: var(--fd);
+      font-size: 22px;
+      letter-spacing: 3px;
+      color: rgba(255, 255, 255, .2);
+      transition: color .2s;
+      cursor: default
+    }
+
+    .plogo:hover {
+      color: rgba(255, 255, 255, .5)
+    }
+
+    @media(max-width:1024px) {
+      .mission-grid {
+        grid-template-columns: 1fr;
+        gap: 36px
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .why-big-grid {
+        grid-template-columns: 1fr 1fr
+      }
+    }
+
+    @media(max-width:768px) {
+      .team-grid {
+        grid-template-columns: 1fr
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr
+      }
+
+      .why-big-grid {
+        grid-template-columns: 1fr
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo.png" alt="AMK">
+      <div class="nav-logo-txt">
+        <div class="n1">AMK KARTS</div>
+        <div class="n2">Alle Möglichen Kraftfahrzeuge</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <span class="nav-phone">+91 9610424888</span>
+      <a href="contact.html" class="btn btn-r"><span>GET QUOTE</span></a>
+    </div>
+    <button class="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+  <nav class="mnav">
+    <a href="index.html">Home</a><a href="products.html">Products</a><a href="services.html">Services</a><a
+      href="about.html">About</a><a href="contact.html">Contact</a>
+    <div class="mnav-foot">
+      <p style="color:var(--yellow);font-family:var(--fh);font-weight:700">+91 9610424888</p>
+      <p>info@amkindustry.com</p>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="phero">
+    <div class="wrap phero-in">
+      <p class="breadcrumb"><a href="index.html">Home</a> › <span>About Us</span></p>
+      <h1>ABOUT <span>AMK</span></h1>
+      <p style="font-size:15px;color:var(--muted);margin-top:10px;max-width:480px">Alle Möglichen Kraftfahrzeuge —
+        Driving innovation in electric mobility and motorsport.</p>
+    </div>
+  </div>
+  <div class="race-stripe"></div>
+
+  <!-- MISSION -->
+  <section class="mission-sec">
+    <div class="wrap">
+      <div class="mission-grid fu">
+        <div>
+          <p class="tag">Our Story</p>
+          <h2 class="sh">DRIVEN BY <span>PASSION</span></h2>
+          <div class="redline"></div>
+          <div class="mission-quote">"Delivering <span>Performance</span> — One Kart at a Time."</div>
+          <p style="font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:20px">AMK Industry — Alle Möglichen
+            Kraftfahrzeuge Industry — was founded with a singular mission: to bring world-class go-kart experiences to
+            India. From our roots in automotive engineering, we have grown into India's premier manufacturer of electric
+            and petrol go-karts.</p>
+          <p style="font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:28px">Our FUNZO brand go-karts are
+            engineered for performance, safety, and durability. We combine cutting-edge electric vehicle technology with
+            proven motorsport engineering to create karts that thrill riders and deliver exceptional commercial value
+            for track operators.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <a href="contact.html" class="btn btn-r"><span>CONTACT US →</span></a>
+            <a href="products.html" class="btn btn-o">EXPLORE KARTS</a>
+          </div>
+        </div>
+        <div class="mission-img">
+          <img src="assets/electric-kart-double.jpg" alt="AMK Industry">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-band">
+    <div class="stats-red-inner wrap-wide">
+      <div class="sbox">
+        <div class="sn" data-t="500" data-s="+">0+</div>
+        <div class="sl">Karts Manufactured</div>
+      </div>
+      <div class="sbox">
+        <div class="sn" data-t="50" data-s="+">0+</div>
+        <div class="sl">Tracks Built</div>
+      </div>
+      <div class="sbox">
+        <div class="sn" data-t="15" data-s="+">0+</div>
+        <div class="sl">Years Experience</div>
+      </div>
+      <div class="sbox">
+        <div class="sn" data-t="100" data-s="%">0%</div>
+        <div class="sl">Client Satisfaction</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VALUES -->
+  <section class="values-sec">
+    <div class="wrap">
+      <p class="tag fu" style="justify-content:center;text-align:center">What We Stand For</p>
+      <h2 class="sh fu" style="text-align:center">OUR <span>VALUES</span></h2>
+      <div class="redline fu" style="margin:14px auto 0"></div>
+      <div class="values-grid">
+        <div class="val-blk fu">
+          <div class="val-ico">⚡</div>
+          <h4>INNOVATION</h4>
+          <p>Pushing electric vehicle technology forward in motorsport applications with every new kart we build.</p>
+        </div>
+        <div class="val-blk fu d1">
+          <div class="val-ico">🛡️</div>
+          <h4>SAFETY</h4>
+          <p>Every design decision is made with rider safety as the primary consideration. No compromise.</p>
+        </div>
+        <div class="val-blk fu d2">
+          <div class="val-ico">🏆</div>
+          <h4>EXCELLENCE</h4>
+          <p>From component selection to final quality inspection — we hold ourselves to the highest standards.</p>
+        </div>
+        <div class="val-blk fu d3">
+          <div class="val-ico">🤝</div>
+          <h4>PARTNERSHIP</h4>
+          <p>Long-term relationships with our clients, built on trust, transparency, and continued support.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team-sec">
+    <div class="wrap">
+      <p class="tag fu">The People Behind AMK</p>
+      <h2 class="sh fu">MEET THE <span>TEAM</span></h2>
+      <div class="redline fu"></div>
+      <p class="sdesc fu">A dedicated team of engineers, designers, and racing enthusiasts united by their passion for
+        motorsport.</p>
+      <div class="team-grid">
+        <div class="team-card fu">
+          <div class="timg">👨‍💼</div>
+          <div class="tbd">
+            <h4>Managing Director</h4>
+            <p class="role">Founder & CEO</p>
+            <p>Visionary leader with deep roots in automotive manufacturing and motorsport, driving AMK's growth across
+              India.</p>
+          </div>
+        </div>
+        <div class="team-card fu d2">
+          <div class="timg">👨‍🔧</div>
+          <div class="tbd">
+            <h4>Head of Engineering</h4>
+            <p class="role">Chief Engineer</p>
+            <p>Lead engineer with expertise in electric vehicle technology, responsible for all kart design and
+              manufacturing specifications.</p>
+          </div>
+        </div>
+        <div class="team-card fu d4">
+          <div class="timg">👷</div>
+          <div class="tbd">
+            <h4>Track Projects Director</h4>
+            <p class="role">Track Design & Construction</p>
+            <p>Specialist in karting circuit design and construction, having delivered over 50 tracks across India.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE AMK -->
+  <section class="why-band">
+    <div class="wrap">
+      <p class="tag fu">Why AMK Industry</p>
+      <h2 class="sh fu">REASONS TO <span>CHOOSE US</span></h2>
+      <div class="redline fu"></div>
+      <div class="why-big-grid">
+        <div class="fcard fu">
+          <div class="ficon">🏭</div>
+          <h4>DIRECT MANUFACTURER</h4>
+          <p>No middlemen. Buy directly from the manufacturer for the best price and full technical support.</p>
+        </div>
+        <div class="fcard fu d1">
+          <div class="ficon">🔋</div>
+          <h4>EV TECHNOLOGY LEADERS</h4>
+          <p>Pioneering electric go-kart technology in India with Smart BMS and connected car features.</p>
+        </div>
+        <div class="fcard fu d2">
+          <div class="ficon">🎨</div>
+          <h4>FULL CUSTOMISATION</h4>
+          <p>Every kart built to your exact specifications — colour, graphics, branding, and performance settings.</p>
+        </div>
+        <div class="fcard fu d3">
+          <div class="ficon">📐</div>
+          <h4>END-TO-END SOLUTIONS</h4>
+          <p>From a single kart order to complete track design and construction — one partner, everything covered.</p>
+        </div>
+        <div class="fcard fu d4">
+          <div class="ficon">🔧</div>
+          <h4>RELIABLE AFTERSALES</h4>
+          <p>1-year warranty, spare parts supply, and a service team ready to keep your karts running.</p>
+        </div>
+        <div class="fcard fu d4">
+          <div class="ficon">📦</div>
+          <h4>PAN-INDIA DELIVERY</h4>
+          <p>We deliver and install karts and track equipment anywhere across India with full logistics support.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline-sec">
+    <div class="wrap">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start" class="fu">
+        <div>
+          <p class="tag">Our Journey</p>
+          <h2 class="sh">AMK <span>MILESTONES</span></h2>
+          <div class="redline"></div>
+          <p class="sdesc" style="margin-bottom:36px">From a workshop dream to India's premier kart manufacturer — every
+            year a new milestone.</p>
+          <a href="contact.html" class="btn btn-r"><span>JOIN OUR JOURNEY →</span></a>
+        </div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-year">Year 1</div>
+            <h4>AMK INDUSTRY FOUNDED</h4>
+            <p>Established with a vision to bring premium go-karting to India through local manufacturing.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">Year 3</div>
+            <h4>FIRST COMMERCIAL TRACK</h4>
+            <p>Designed and built our first commercial karting track for a major resort in South India.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">Year 6</div>
+            <h4>FUNZO BRAND LAUNCHED</h4>
+            <p>Launched the FUNZO go-kart brand with the first-generation electric single-seater kart.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">Year 10</div>
+            <h4>ELECTRIC FLEET MILESTONE</h4>
+            <p>Delivered our 200th electric kart and expanded to double-seater and petrol models.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">Today</div>
+            <h4>500+ KARTS & COUNTING</h4>
+            <p>500+ karts manufactured, 50+ tracks built, and expanding across India and beyond.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="partner-sec">
+    <div class="wrap">
+      <p class="tag">Trusted Technology Partners</p>
+      <div class="partner-logos">
+        <span class="plogo">HONDA</span>
+        <span class="plogo">FUNZO</span>
+        <span class="plogo">TUBELESS PRO</span>
+        <span class="plogo">ALLOY MASTER</span>
+        <span class="plogo">SMARTBMS</span>
+        <span class="plogo">LITHTECH</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section
+    style="padding:80px 0;background:linear-gradient(135deg,#140808,var(--bg));border-top:1px solid rgba(227,30,36,.2)">
+    <div class="wrap" style="text-align:center">
+      <p class="tag" style="justify-content:center">Work With Us</p>
+      <h2 class="sh" style="margin-bottom:16px">READY TO START YOUR <span>KART</span> PROJECT?</h2>
+      <p style="font-size:15px;color:var(--muted);max-width:480px;margin:0 auto 32px">Get in touch with our team for a
+        free consultation and tailored quote.</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+        <a href="contact.html" class="btn btn-r"><span>CONTACT US →</span></a>
+        <a href="products.html" class="btn btn-o">VIEW PRODUCTS</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="fbrand">
+          <a href="index.html" class="nav-logo" style="margin-bottom:16px;display:flex">
+            <img src="assets/logo.png" alt="AMK">
+            <div class="nav-logo-txt">
+              <div class="n1">AMK KARTS</div>
+              <div class="n2">Alle Möglichen Kraftfahrzeuge</div>
+            </div>
+          </a>
+          <p>Driving innovation in electric mobility. Manufacturers of premium go-karts and builders of world-class
+            racing tracks across India.</p>
+          <div class="fsoc"><a href="#">FB</a><a href="#">IG</a><a href="#">YT</a><a href="#">LI</a></div>
+        </div>
+        <div class="fcol">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="products.html#electric-single">Electric Kart (Single)</a></li>
+            <li><a href="products.html#electric-double">Electric Kart (Double)</a></li>
+            <li><a href="products.html#petrol-single">Petrol Kart</a></li>
+            <li><a href="contact.html">Request Custom Kart</a></li>
+          </ul>
+        </div>
+        <div class="fcol">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="services.html#design">Track Design</a></li>
+            <li><a href="contact.html">Get a Quote</a></li>
+          </ul>
+        </div>
+        <div class="fcol">
+          <h4>Contact</h4>
+          <div class="fci">
+            <div class="fci-icon">📞</div>
+            <div>
+              <p>Phone</p>
+              <p>+91 9610424888</p>
+            </div>
+          </div>
+          <div class="fci">
+            <div class="fci-icon">✉</div>
+            <div>
+              <p>Email</p>
+              <p>info@amkindustry.com</p>
+            </div>
+          </div>
+          <div class="fci">
+            <div class="fci-icon">🌐</div>
+            <div>
+              <p>Website</p>
+              <p>www.amkindustry.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fbot">
+        <p>© 2025 <span>AMK Industry</span>. All Rights Reserved.</p>
+        <p>Driving Passion. Delivering Performance.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
