@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Products — AMK Industry | Electric & Petrol Go-Karts</title>
+<link rel="stylesheet" href="shared.css">
+<link rel="icon" href="assets/logo.png">
+<style>
+/* FILTER BAR */
+.filter-bar{display:flex;gap:10px;margin:36px 0;flex-wrap:wrap}
+.filter-btn{font-family:var(--fh);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:9px 20px;background:var(--bg-white);border:1.5px solid var(--border2);color:var(--txt-muted);cursor:pointer;transition:var(--tr);clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
+.filter-btn.active,.filter-btn:hover{background:var(--red);border-color:var(--red);color:#fff}
+
+/* PRODUCT DETAIL */
+.prod-detail{padding:72px 0;border-bottom:1px solid var(--border);background:var(--bg-white)}
+.prod-detail:nth-child(even){background:var(--bg)}
+.pd-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.pd-img-wrap{position:sticky;top:100px}
+.pd-img-main{width:100%;height:380px;object-fit:cover;border:1px solid var(--border);box-shadow:var(--shadow-md)}
+.pd-badge{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;font-family:var(--fh);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.pd-badge.electric{background:rgba(184,134,11,.1);border:1px solid rgba(184,134,11,.25);color:var(--gold)}
+.pd-badge.petrol{background:var(--bg-soft);border:1px solid var(--border2);color:var(--txt-muted)}
+.pd-name{font-family:var(--fd);font-size:clamp(30px,4vw,50px);letter-spacing:2px;line-height:1;margin-bottom:10px;color:var(--txt)}
+.pd-name span{color:var(--red)}
+.pd-tagline{font-family:var(--fh);font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--txt-muted);margin-bottom:18px}
+.pd-desc{font-size:14px;color:var(--txt-muted);line-height:1.75;margin-bottom:24px}
+.pd-price-box{background:var(--bg-soft);border:1px solid var(--border);padding:20px 24px;margin-bottom:24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.pd-price{font-family:var(--fd);font-size:44px;color:var(--red);letter-spacing:1px;line-height:1}
+.pd-price-note{font-size:12px;color:var(--txt-muted);letter-spacing:1px}
+.pd-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+.key-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;padding-top:24px;border-top:1px solid var(--border)}
+.ks-item{background:var(--bg-soft);border:1px solid var(--border);padding:14px;text-align:center}
+.ks-item .ksl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--txt-muted);margin-bottom:4px;font-family:var(--fh)}
+.ks-item .ksv{font-family:var(--fh);font-size:16px;font-weight:700;color:var(--txt)}
+
+/* COLOUR SWATCH */
+.colors-row{display:flex;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap;padding:14px;background:var(--bg-soft);border:1px solid var(--border)}
+.colors-row .clbl{font-family:var(--fh);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--txt-muted)}
+.swatch{width:22px;height:22px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:border-color .2s}
+.swatch:hover,.swatch.active{border-color:var(--txt)}
+
+/* HIGHLIGHTS GRID */
+.hi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
+.hi-blk{background:var(--bg-soft);border:1px solid var(--border);padding:16px;display:flex;align-items:flex-start;gap:10px}
+.hi-blk .ic{color:var(--red);font-size:14px;flex-shrink:0;margin-top:2px;font-weight:700}
+.hi-blk p{font-size:12px;color:var(--txt-muted);line-height:1.5}
+.hi-blk strong{color:var(--txt);font-family:var(--fh);font-size:13px;display:block;margin-bottom:2px}
+
+/* COMPARE */
+.comp-sec{padding:80px 0;background:var(--bg-soft)}
+.comp-table{width:100%;border-collapse:collapse;margin-top:36px;background:var(--bg-white);border:1px solid var(--border)}
+.comp-table th,.comp-table td{padding:13px 18px;border:1px solid var(--border);font-size:13px;text-align:left}
+.comp-table th{font-family:var(--fh);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:var(--red);color:#fff}
+.comp-table th:first-child{background:var(--txt);color:#fff}
+.comp-table td:first-child{color:var(--txt-muted);font-family:var(--fh);font-size:11px;letter-spacing:1px;text-transform:uppercase;background:var(--bg-soft);width:22%;font-weight:700}
+.comp-table tr:hover td{background:rgba(208,26,31,.025)}
+.comp-table .yes{color:#16a34a;font-weight:700}
+.comp-table .no{color:var(--txt-light)}
+.comp-table td.hi{color:var(--red);font-weight:700}
+
+@media(max-width:1024px){
+  .pd-grid{grid-template-columns:1fr;gap:32px}
+  .pd-img-wrap{position:static}
+  .key-specs{grid-template-columns:repeat(2,1fr)}
+  .hi-grid{grid-template-columns:1fr}
+  .comp-table{font-size:12px}
+}
+@media(max-width:768px){
+  .comp-table{display:block;overflow-x:auto}
+  .key-specs{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index-light.html" class="nav-logo">
+    <img src="assets/logo.png" alt="AMK Industry">
+    <div class="nav-logo-txt"><div class="n1">AMK KARTS</div><div class="n2">Alle Möglichen Kraftfahrzeuge</div></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index-light.html">Home</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="nav-phone">+91 9610424888</span>
+    <a href="contact.html" class="btn btn-r"><span>GET QUOTE</span></a>
+  </div>
+  <button class="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<nav class="mnav">
+  <a href="index-light.html">Home</a><a href="products.html">Products</a>
+  <a href="services.html">Services</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+  <div class="mnav-foot"><p style="color:var(--red);font-family:var(--fh);font-weight:700;font-size:16px">+91 9610424888</p><p>info@amkindustry.com</p></div>
+</nav>
+
+<div class="phero">
+  <div class="wrap phero-in">
+    <p class="breadcrumb"><a href="index-light.html">Home</a> › <span>Products</span></p>
+    <h1>OUR <span>KARTS</span></h1>
+    <p style="font-size:15px;color:var(--txt-muted);margin-top:10px;max-width:480px">Three precision-engineered go-karts built for fun, safety and commercial durability.</p>
+  </div>
+</div>
+<div class="race-stripe"></div>
+
+<div class="wrap">
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterKarts('all',this)">All Karts</button>
+    <button class="filter-btn" onclick="filterKarts('electric',this)">⚡ Electric</button>
+    <button class="filter-btn" onclick="filterKarts('petrol',this)">⛽ Petrol</button>
+    <button class="filter-btn" onclick="filterKarts('single',this)">Single Seater</button>
+    <button class="filter-btn" onclick="filterKarts('double',this)">Double Seater</button>
+  </div>
+</div>
+
+<!-- PRODUCT 1: ELECTRIC SINGLE -->
+<section class="prod-detail" id="electric-single" data-cat="electric single">
+  <div class="wrap">
+    <div class="pd-grid fu">
+      <div class="pd-img-wrap">
+        <img src="assets/electric-kart-single.jpg" alt="Super Automatic Electric Kart Single Seater" class="pd-img-main">
+        <div class="colors-row">
+          <span class="clbl">Choose Colour:</span>
+          <div class="swatch active" style="background:#F5C518" title="Yellow"></div>
+          <div class="swatch" style="background:#E31E24" title="Red"></div>
+          <div class="swatch" style="background:#2563eb" title="Blue"></div>
+          <div class="swatch" style="background:#16a34a" title="Green"></div>
+          <div class="swatch" style="background:#f97316" title="Orange"></div>
+          <span style="font-size:11px;color:var(--txt-muted)">Custom available</span>
+        </div>
+      </div>
+      <div>
+        <div class="pd-badge electric">⚡ Electric · Single Seater</div>
+        <h2 class="pd-name">SUPER AUTOMATIC<br><span>ELECTRIC KART</span></h2>
+        <p class="pd-tagline">Power. Performance. Pure Fun. — Zero Emission</p>
+        <p class="pd-desc">The FUNZO single-seater electric kart combines a powerful 1500W brushless motor with Smart BMS technology, delivering up to 60 km/h with whisper-quiet operation. Two ride modes make it perfect for both kids and adults at any commercial venue.</p>
+        <div class="pd-price-box">
+          <div>
+            <div class="pd-price">₹1,87,500</div>
+            <p class="pd-price-note">GST EXTRA · Ex-Factory Price</p>
+          </div>
+        </div>
+        <div class="pd-btns">
+          <a href="contact.html?product=Electric+Kart+Single" class="btn btn-r"><span>ENQUIRE NOW →</span></a>
+          <a href="contact.html?product=Electric+Kart+Single&type=quote" class="btn btn-o">GET A QUOTE</a>
+        </div>
+        <div class="tabs-wrap">
+          <div class="tabs">
+            <button class="tab-btn active" data-tab="es-specs">Specifications</button>
+            <button class="tab-btn" data-tab="es-highlights">Highlights</button>
+            <button class="tab-btn" data-tab="es-usage">Ideal For</button>
+          </div>
+          <div id="es-specs" class="tab-panel active">
+            <table class="stbl">
+              <tr><td>Motor</td><td>1500 Watts Brushless</td></tr>
+              <tr><td>Battery</td><td>60V 45Ah Lithium Battery</td></tr>
+              <tr><td>BMS</td><td>Smart BMS with Connected Car Tech</td></tr>
+              <tr><td>Top Speed</td><td>60 KM/H</td></tr>
+              <tr><td>Range</td><td>Up to 40 KM per charge</td></tr>
+              <tr><td>Reverse Mode</td><td>Available</td></tr>
+              <tr><td>Ride Modes</td><td>Kids Mode &amp; Adult Mode</td></tr>
+              <tr><td>Tyres</td><td>Tubeless Tyres</td></tr>
+              <tr><td>Wheels</td><td>Premium Alloy Wheels</td></tr>
+              <tr><td>Brakes</td><td>Hydraulic Disc Brake</td></tr>
+              <tr><td>Seat Belt</td><td>Adjustable</td></tr>
+              <tr><td>Lights</td><td>LED Headlamp &amp; Tail Lamp</td></tr>
+              <tr><td>Customisation</td><td>Colour &amp; Graphic (Customer Choice)</td></tr>
+            </table>
+          </div>
+          <div id="es-highlights" class="tab-panel">
+            <div class="hi-grid">
+              <div class="hi-blk"><span class="ic">✓</span><div><strong>Strong &amp; Durable Chassis</strong><p>High-quality steel tubing for maximum safety and longevity.</p></div></div>
+              <div class="hi-blk"><span class="ic">✓</span><div><strong>Hydraulic Disc Brake</strong><p>Superior stopping power and consistent braking performance.</p></div></div>
+              <div class="hi-blk"><span class="ic">✓</span><div><strong>LED Headlamp &amp; Tail Lamp</strong><p>Full visibility lighting for safe operation in any environment.</p></div></div>
+              <div class="hi-blk"><span class="ic">✓</span><div><strong>Tubeless Tyres</strong><p>Enhanced traction and puncture resistance for smooth cornering.</p></div></div>
+              <div class="hi-blk"><span class="ic">✓</span><div><strong>Premium Alloy Wheels</strong><p>Lightweight and durable, improving handling and aesthetics.</p></div></div>
+              <div class="hi-blk"><span class="ic">✓</span><div><strong>2 Ride Modes</strong><p>Speed limiting in Kids Mode. Full power in Adult Mode.</p></div></div>
+            </div>
+          </div>
+          <div id="es-usage" class="tab-panel">
+            <ul class="hlist" style="margin-top:8px">
+              <li>Go-Kart Tracks</li><li>Resorts &amp; Hotels</li><li>Amusement Parks</li>
+              <li>Rental Business Operators</li><li>Corporate Events &amp; Team Building</li><li>Personal Use</li>
+            </ul>
+          </div>
+        </div>
+        <div class="key-specs">
+          <div class="ks-item"><div class="ksl">Motor</div><div class="ksv">1500W</div></div>
+          <div class="ks-item"><div class="ksl">Speed</div><div class="ksv">60 km/h</div></div>
+          <div class="ks-item"><div class="ksl">Range</div><div class="ksv">40 km</div></div>
+          <div class="ks-item"><div class="ksl">Battery</div><div class="ksv">60V 45Ah</div></div>
+          <div class="ks-item"><div class="ksl">Seating</div><div class="ksv">1 Person</div></div>
+          <div class="ks-item"><div class="ksl">Modes</div><div class="ksv">Kids + Adult</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT 2: PETROL SINGLE -->
+<section class="prod-detail" id="petrol-single" data-cat="petrol single">
+  <div class="wrap">
+    <div class="pd-grid fu">
+      <div>
+        <div class="pd-badge petrol">⛽ Petrol · Single Seater</div>
+        <h2 class="pd-name">SUPER SINGLE-SEATER<br><span>PETROL KART</span></h2>
+        <p class="pd-tagline">Pure Power. Total Control. — Racing Performance</p>
+        <p class="pd-desc">Powered by the legendary Honda GX Series 200cc engine with CVT Automatic Transmission. Delivers raw, visceral racing thrills with smooth acceleration and no manual gear shifting — suitable for all skill levels from beginners to professionals.</p>
+        <div class="pd-price-box">
+          <div>
+            <div class="pd-price">₹1,76,870</div>
+            <p class="pd-price-note">EX-FACTORY PRICE + TAXES</p>
+          </div>
+        </div>
+        <div class="pd-btns">
+          <a href="contact.html?product=Petrol+Kart+Single" class="btn btn-r"><span>ENQUIRE NOW →</span></a>
+          <a href="contact.html?product=Petrol+Kart+Single&type=quote" class="btn btn-o">GET A QUOTE</a>
+        </div>
+        <div class="tabs-wrap">
+          <div class="tabs">
+            <button class="tab-btn active" data-tab="ps-specs">Specifications</button>
+            <button class="tab-btn" data-tab="ps-engine">Engine &amp; CVT</button>
+            <button class="tab-btn" data-tab="ps-safety">Safety</button>
+          </div>
+          <div id="ps-specs" class="tab-panel active">
+            <table class="stbl">
+              <tr><td>Engine</td><td>200cc Honda GX Series</td></tr>
+              <tr><td>Transmission</td><td>CVT Automatic (Continuously Variable)</td></tr>
+              <tr><td>Gear Shifting</td><td>None – Fully Automatic</td></tr>
+              <tr><td>Tyres</td><td>Tubeless Racing Tyres</td></tr>
+              <tr><td>Wheels</td><td>Lightweight Alloy Rims</td></tr>
+              <tr><td>Brakes</td><td>Hydraulic Disc Brake System</td></tr>
+              <tr><td>Seat Belt</td><td>High-Strength 5-Point</td></tr>
+              <tr><td>Chassis</td><td>Strong Tubular Steel</td></tr>
+              <tr><td>Maintenance</td><td>Easy, Low Cost</td></tr>
+            </table>
+          </div>
+          <div id="ps-engine" class="tab-panel">
+            <p style="font-size:13px;color:var(--txt-muted);margin-bottom:14px">CVT automatically adjusts power delivery for smooth, seamless acceleration without manual gear shifting.</p>
+            <ul class="hlist">
+              <li>200cc Honda GX Series — reliability &amp; smooth power</li>
+              <li>Smooth &amp; seamless acceleration at all speeds</li>
+              <li>No gear shifting — easy to drive for beginners</li>
+              <li>Better control &amp; safety for all skill levels</li>
+              <li>Engine Power → Driving Pulley → Driven Pulley → Rear Axle</li>
+            </ul>
+          </div>
+          <div id="ps-safety" class="tab-panel">
+            <ul class="hlist" style="margin-top:8px">
+              <li>High-Strength Seat Belt — secure driver restraint at high speeds</li>
+              <li>Hydraulic Disc Brake System — powerful stopping, heat dissipation</li>
+              <li>Tubeless Racing Tyres — reduced puncture risk</li>
+              <li>Strong Tubular Steel Chassis — impact-absorbing frame</li>
+              <li>Low Center of Gravity — superior stability and handling</li>
+            </ul>
+          </div>
+        </div>
+        <div class="key-specs">
+          <div class="ks-item"><div class="ksl">Engine</div><div class="ksv">200cc</div></div>
+          <div class="ks-item"><div class="ksl">Brand</div><div class="ksv">Honda GX</div></div>
+          <div class="ks-item"><div class="ksl">Gearbox</div><div class="ksv">CVT Auto</div></div>
+          <div class="ks-item"><div class="ksl">Brakes</div><div class="ksv">Hydraulic</div></div>
+          <div class="ks-item"><div class="ksl">Tyres</div><div class="ksv">Tubeless</div></div>
+          <div class="ks-item"><div class="ksl">Seating</div><div class="ksv">1 Person</div></div>
+        </div>
+      </div>
+      <div class="pd-img-wrap">
+        <img src="assets/petrol-kart.jpg" alt="Super Single-Seater Petrol Kart" class="pd-img-main">
+        <div class="colors-row">
+          <span class="clbl">Available in:</span>
+          <div class="swatch active" style="background:#E31E24" title="Red"></div>
+          <div class="swatch" style="background:#111" title="Black"></div>
+          <div class="swatch" style="background:#F5C518" title="Yellow"></div>
+          <span style="font-size:11px;color:var(--txt-muted)">Custom available</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT 3: ELECTRIC DOUBLE -->
+<section class="prod-detail" id="electric-double" data-cat="electric double">
+  <div class="wrap">
+    <div class="pd-grid fu">
+      <div class="pd-img-wrap">
+        <img src="assets/electric-kart-double.jpg" alt="Super Automatic Electric Kart Double Seater" class="pd-img-main">
+        <div class="colors-row">
+          <span class="clbl">Choose Colour:</span>
+          <div class="swatch active" style="background:#F5C518" title="Yellow"></div>
+          <div class="swatch" style="background:#E31E24" title="Red"></div>
+          <div class="swatch" style="background:#2563eb" title="Blue"></div>
+          <div class="swatch" style="background:#16a34a" title="Green"></div>
+          <div class="swatch" style="background:#f97316" title="Orange"></div>
+          <span style="font-size:11px;color:var(--txt-muted)">Custom available</span>
+        </div>
+      </div>
+      <div>
+        <div class="pd-badge electric">⚡ Electric · Double Seater</div>
+        <h2 class="pd-name">SUPER AUTOMATIC<br><span>ELECTRIC KART</span> DOUBLE</h2>
+        <p class="pd-tagline">Share the Thrill — Zero Emission Maximum Fun</p>
+        <p class="pd-desc">The FUNZO dual-seater electric kart packs a 2000W motor with a 60V 45Ah battery for extended range up to 45km. Seating for 2, digital display, Smart BMS — the ideal choice for resorts, family parks, and premium rental operations.</p>
+        <div class="pd-price-box">
+          <div>
+            <div class="pd-price">₹2,16,000</div>
+            <p class="pd-price-note">GST EXTRA · Special Price</p>
+          </div>
+          <div style="background:var(--red);color:#fff;padding:8px 14px;font-family:var(--fh);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase">BEST SELLER</div>
+        </div>
+        <div class="pd-btns">
+          <a href="contact.html?product=Electric+Kart+Double" class="btn btn-r"><span>ENQUIRE NOW →</span></a>
+          <a href="contact.html?product=Electric+Kart+Double&type=quote" class="btn btn-o">GET A QUOTE</a>
+        </div>
+        <div class="tabs-wrap">
+          <div class="tabs">
+            <button class="tab-btn active" data-tab="ed-specs">Full Specifications</button>
+            <button class="tab-btn" data-tab="ed-modes">Ride Modes</button>
+            <button class="tab-btn" data-tab="ed-custom">Customisation</button>
+          </div>
+          <div id="ed-specs" class="tab-panel active">
+            <table class="stbl">
+              <tr><td>Motor</td><td>2000 Watts × 01</td></tr>
+              <tr><td>Battery</td><td>60 Volt 45 Ah × 01</td></tr>
+              <tr><td>Transmission</td><td>Chain Drive 4.2:1</td></tr>
+              <tr><td>Brake Rear</td><td>200 mm Disc</td></tr>
+              <tr><td>Front/Rear Wheel</td><td>10×4-05 / 11×7.4-05 Tubeless</td></tr>
+              <tr><td>Dimensions</td><td>60×40×20 in</td></tr>
+              <tr><td>Charging Time</td><td>3.4 Hours</td></tr>
+              <tr><td>Range</td><td>Up to 45 Km</td></tr>
+              <tr><td>Frame</td><td>Tubular Steel</td></tr>
+              <tr><td>Top Speed</td><td>60 km/hr</td></tr>
+              <tr><td>Weight</td><td>158 kg</td></tr>
+              <tr><td>Seating Capacity</td><td>2</td></tr>
+              <tr><td>Warranty</td><td>1 Year</td></tr>
+              <tr><td>Digital Display</td><td>Yes</td></tr>
+              <tr><td>Smart BMS</td><td>Yes</td></tr>
+            </table>
+          </div>
+          <div id="ed-modes" class="tab-panel">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px">
+              <div class="fcard"><div class="ficon">👶</div><h4>KIDS MODE</h4><p>Lower speed setting for safe, controlled fun. Perfect for younger riders at family entertainment venues.</p></div>
+              <div class="fcard"><div class="ficon">🏎️</div><h4>ADULT MODE</h4><p>Full 2000W performance mode. High performance thrills for experienced adult riders and commercial operators.</p></div>
+            </div>
+          </div>
+          <div id="ed-custom" class="tab-panel">
+            <p style="font-size:13px;color:var(--txt-muted);margin-bottom:14px">Every AMK kart can be fully customised to match your brand and venue aesthetic.</p>
+            <ul class="hlist">
+              <li>Colour &amp; Graphic as per Customer Choice</li>
+              <li>Custom branding and livery</li>
+              <li>Perfect for Go-Kart Tracks, Resorts</li>
+              <li>Amusement Parks &amp; Entertainment Venues</li>
+              <li>Rental Business customisation available</li>
+            </ul>
+            <a href="contact.html?product=Electric+Kart+Double&type=custom" class="btn btn-r" style="margin-top:18px;display:inline-flex"><span>REQUEST CUSTOMISATION →</span></a>
+          </div>
+        </div>
+        <div class="key-specs">
+          <div class="ks-item"><div class="ksl">Motor</div><div class="ksv">2000W</div></div>
+          <div class="ks-item"><div class="ksl">Speed</div><div class="ksv">60 km/h</div></div>
+          <div class="ks-item"><div class="ksl">Range</div><div class="ksv">45 km</div></div>
+          <div class="ks-item"><div class="ksl">Charge</div><div class="ksv">3.4 hrs</div></div>
+          <div class="ks-item"><div class="ksl">Seating</div><div class="ksv">2 Person</div></div>
+          <div class="ks-item"><div class="ksl">Warranty</div><div class="ksv">1 Year</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="comp-sec">
+  <div class="wrap">
+    <p class="tag fu">Side By Side</p>
+    <h2 class="sh fu">COMPARE <span>ALL KARTS</span></h2>
+    <div class="redline fu"></div>
+    <div style="overflow-x:auto">
+      <table class="comp-table fu">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>⚡ Electric Single</th>
+            <th>⛽ Petrol Single</th>
+            <th>⚡ Electric Double</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Price</td><td class="hi">₹1,87,500</td><td class="hi">₹1,76,870</td><td class="hi">₹2,16,000</td></tr>
+          <tr><td>Power Source</td><td>Electric 1500W</td><td>Petrol 200cc Honda</td><td>Electric 2000W</td></tr>
+          <tr><td>Top Speed</td><td>60 km/h</td><td>Racing Speed</td><td>60 km/h</td></tr>
+          <tr><td>Seating</td><td>1 Person</td><td>1 Person</td><td class="hi">2 Person</td></tr>
+          <tr><td>Range</td><td>40 km</td><td>Full tank</td><td class="hi">45 km</td></tr>
+          <tr><td>Transmission</td><td>Auto Electric</td><td>CVT Auto</td><td>Chain Drive 4.2:1</td></tr>
+          <tr><td>Kids Mode</td><td class="yes">✓ Yes</td><td class="no">✗ No</td><td class="yes">✓ Yes</td></tr>
+          <tr><td>Reverse Mode</td><td class="yes">✓ Yes</td><td class="no">✗ No</td><td class="yes">✓ Yes</td></tr>
+          <tr><td>Smart BMS</td><td class="yes">✓ Yes</td><td class="no">✗ N/A</td><td class="yes">✓ Yes</td></tr>
+          <tr><td>Digital Display</td><td class="no">✗ No</td><td class="no">✗ No</td><td class="yes">✓ Yes</td></tr>
+          <tr><td>Hydraulic Disc Brake</td><td class="yes">✓ Yes</td><td class="yes">✓ Yes</td><td class="yes">✓ Yes</td></tr>
+          <tr><td>Zero Emissions</td><td class="yes">✓ Yes</td><td class="no">✗ No</td><td class="yes">✓ Yes</td></tr>
+          <tr><td>Warranty</td><td>1 Year</td><td>1 Year</td><td class="hi">1 Year</td></tr>
+          <tr><td>Customisation</td><td class="yes">✓ Full</td><td class="yes">✓ Full</td><td class="yes">✓ Full</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="text-align:center;margin-top:40px">
+      <p style="font-size:14px;color:var(--txt-muted);margin-bottom:18px">Can't decide? Our team will help you choose the right kart for your business or personal use.</p>
+      <a href="contact.html" class="btn btn-r"><span>SPEAK TO AN EXPERT →</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="fbrand">
+        <a href="index-light.html" class="nav-logo" style="margin-bottom:16px;display:flex">
+          <img src="assets/logo.png" alt="AMK"><div class="nav-logo-txt"><div class="n1">AMK KARTS</div><div class="n2">Alle Möglichen Kraftfahrzeuge</div></div>
+        </a>
+        <p>Driving innovation in electric mobility. Manufacturers of premium go-karts and builders of world-class racing tracks across India.</p>
+        <div class="fsoc"><a href="#">FB</a><a href="#">IG</a><a href="#">YT</a><a href="#">LI</a></div>
+      </div>
+      <div class="fcol"><h4>Products</h4><ul>
+        <li><a href="#electric-single">Electric Kart (Single)</a></li>
+        <li><a href="#electric-double">Electric Kart (Double)</a></li>
+        <li><a href="#petrol-single">Petrol Kart</a></li>
+        <li><a href="contact.html">Request Custom Kart</a></li>
+      </ul></div>
+      <div class="fcol"><h4>Company</h4><ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="services.html#design">Track Design</a></li>
+        <li><a href="contact.html">Get a Quote</a></li>
+      </ul></div>
+      <div class="fcol"><h4>Contact</h4>
+        <div class="fci"><div class="fci-icon">📞</div><div><p>Phone</p><p>+91 9610424888</p></div></div>
+        <div class="fci"><div class="fci-icon">✉</div><div><p>Email</p><p>info@amkindustry.com</p></div></div>
+        <div class="fci"><div class="fci-icon">🌐</div><div><p>Website</p><p>www.amkindustry.com</p></div></div>
+      </div>
+    </div>
+    <div class="fbot">
+      <p>© 2025 <span>AMK Industry</span>. All Rights Reserved.</p>
+      <p>Driving Passion. Delivering Performance.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+document.querySelectorAll('.colors-row').forEach(row=>{
+  row.querySelectorAll('.swatch').forEach(sw=>{
+    sw.addEventListener('click',()=>{ row.querySelectorAll('.swatch').forEach(s=>s.classList.remove('active')); sw.classList.add('active'); });
+  });
+});
+function filterKarts(cat,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.prod-detail').forEach(s=>{
+    const cats=s.getAttribute('data-cat')||'';
+    s.style.display=(cat==='all'||cats.includes(cat))?'':'none';
+  });
+}
+</script>
+</body>
+</html>

@@ -29,13 +29,13 @@
     );
 
   // Active nav
-  const pg = window.location.pathname.split("/").pop() || "index.html";
+  const pg = window.location.pathname.split("/").pop() || "index-dark.html";
   document.querySelectorAll(".nav-links a,.mnav a").forEach((a) => {
     const h = a.getAttribute("href") || "";
     if (
       h === pg ||
-      (pg === "" && h === "index.html") ||
-      (pg === "index.html" && h === "index.html")
+      (pg === "" && h === "index-dark.html") ||
+      (pg === "index-dark.html" && h === "index-dark.html")
     )
       a.classList.add("active");
   });
