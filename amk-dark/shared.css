@@ -93,11 +93,11 @@ ul {
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   cursor: pointer;
 }
 .nav-logo img {
-  height: 46px;
+  height: 54px;
   width: auto;
 }
 .nav-logo-txt .n1 {
@@ -681,7 +681,6 @@ ul {
   white-space: nowrap;
   transition: var(--tr);
   border-bottom: 2px solid transparent;
-  margin-bottom: -2px;
 }
 .tab-btn.active,
 .tab-btn:hover {

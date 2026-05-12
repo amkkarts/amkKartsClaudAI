@@ -1,24 +1,24 @@
-// AMK INDUSTRY — SHARED JS
+/* ============================================================
+   AMK INDUSTRY — SHARED SCRIPT
+   ============================================================ */
 (function () {
-  // Navbar
+  /* ── Navbar scroll ── */
   const nav = document.querySelector(".nav");
-  const ham = document.querySelector(".ham");
-  const mnav = document.querySelector(".mnav");
   window.addEventListener("scroll", () => {
-    nav &&
-      (window.scrollY > 50
-        ? nav.classList.add("scrolled")
-        : nav.classList.remove("scrolled"));
+    if (nav) nav.classList.toggle("scrolled", window.scrollY > 50);
   });
 
-  // Hamburger
-  ham &&
+  /* ── Hamburger menu ── */
+  const ham = document.querySelector(".ham");
+  const mnav = document.querySelector(".mnav");
+  if (ham) {
     ham.addEventListener("click", () => {
       ham.classList.toggle("open");
       mnav && mnav.classList.toggle("open");
       document.body.style.overflow =
         mnav && mnav.classList.contains("open") ? "hidden" : "";
     });
+  }
   mnav &&
     mnav.querySelectorAll("a").forEach((a) =>
       a.addEventListener("click", () => {
@@ -28,19 +28,20 @@
       }),
     );
 
-  // Active nav
+  /* ── Active nav link ── */
   const pg = window.location.pathname.split("/").pop() || "index-dark.html";
-  document.querySelectorAll(".nav-links a,.mnav a").forEach((a) => {
+  document.querySelectorAll(".nav-links a, .mnav a").forEach((a) => {
     const h = a.getAttribute("href") || "";
     if (
       h === pg ||
-      (pg === "" && h === "index-dark.html") ||
-      (pg === "index-dark.html" && h === "index-dark.html")
-    )
+      h.split("#")[0] === pg ||
+      (pg === "" && h === "index-dark.html")
+    ) {
       a.classList.add("active");
+    }
   });
 
-  // Fade-up observer
+  /* ── Fade-up observer ── */
   const fo = new IntersectionObserver(
     (entries) =>
       entries.forEach((e) => {
@@ -49,15 +50,15 @@
           fo.unobserve(e.target);
         }
       }),
-    { threshold: 0.1 },
+    { threshold: 0.08 },
   );
   document.querySelectorAll(".fu").forEach((el) => fo.observe(el));
 
-  // Counter animation
+  /* ── Counter animation ── */
   function animCount(el) {
     const target = parseInt(el.dataset.t),
-      suffix = el.dataset.s || "",
-      dur = 1600,
+      suffix = el.dataset.s || "";
+    const dur = 1800,
       start = performance.now();
     const tick = (now) => {
       const p = Math.min((now - start) / dur, 1),
@@ -80,7 +81,7 @@
   );
   document.querySelectorAll("[data-t]").forEach((el) => co.observe(el));
 
-  // Tabs
+  /* ── Tab switching ── */
   document.querySelectorAll(".tab-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const tc = btn.closest(".tabs-wrap");
@@ -97,29 +98,152 @@
     });
   });
 
-  // Contact form
+  /* ── FAQ accordion ── */
+  // document.querySelectorAll(".faq-item").forEach((item) => {
+  //   const q = item.querySelector(".faq-q");
+  //   if (!q) return;
+  //   q.addEventListener("click", () => {
+  //     const isOpen = item.classList.contains("open");
+  //     document.querySelectorAll(".faq-item").forEach((i) => {
+  //       i.classList.remove("open");
+  //       const a = i.querySelector(".faq-a");
+  //       if (a) a.classList.remove("open");
+  //     });
+  //     if (!isOpen) {
+  //       item.classList.add("open");
+  //       const a = item.querySelector(".faq-a");
+  //       if (a) a.classList.add("open");
+  //     }
+  //   });
+  // });
+
+  /* ── Product filter ── */
+  window.filterProducts = function (cat, btn) {
+    document
+      .querySelectorAll(".filter-btn")
+      .forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    document.querySelectorAll(".prod-detail").forEach((s) => {
+      const cats = s.getAttribute("data-cat") || "";
+      s.style.display = cat === "all" || cats.includes(cat) ? "" : "none";
+    });
+  };
+
+  /* ── Colour swatch ── */
+  document.querySelectorAll(".colors-row").forEach((row) => {
+    row.querySelectorAll(".swatch").forEach((sw) => {
+      sw.addEventListener("click", () => {
+        row
+          .querySelectorAll(".swatch")
+          .forEach((s) => s.classList.remove("active"));
+        sw.classList.add("active");
+      });
+    });
+  });
+
+  /* ── Contact form ── */
   const cf = document.getElementById("cform");
-  cf &&
+  if (cf) {
     cf.addEventListener("submit", (e) => {
       e.preventDefault();
       const btn = cf.querySelector("button[type=submit]");
-      const orig = btn.innerHTML;
-      btn.innerHTML = "<span>✓ MESSAGE SENT!</span>";
-      btn.style.background = "#16a34a";
+      btn.textContent = "SENDING...";
       btn.disabled = true;
       setTimeout(() => {
-        btn.innerHTML = orig;
-        btn.style.background = "";
-        btn.disabled = false;
-        cf.reset();
-      }, 3200);
+        cf.style.display = "none";
+        const succ = document.getElementById("form-success");
+        if (succ) succ.style.display = "block";
+      }, 1200);
     });
+  }
 
-  // Hash scroll on page load (for anchor links from other pages)
+  /* ── Pre-fill contact form from URL ── */
+  const params = new URLSearchParams(window.location.search);
+  const sel = document.getElementById("interest-select");
+  if (sel) {
+    const pmap = {
+      "Electric+Kart+Single": "electric-single",
+      "Electric Kart Single": "electric-single",
+      "Petrol+Kart+Single": "petrol-single",
+      "Petrol Kart Single": "petrol-single",
+      "Electric+Kart+Double": "electric-double",
+      "Electric Kart Double": "electric-double",
+      "Golf+Cart+6S": "golf-cart-6s",
+      "Vintage+Golf+Cart": "vintage-golf-cart",
+      "Electric+Shuttle": "electric-shuttle",
+      "Cyber+Quad": "cyber-quad",
+    };
+    const p = params.get("product"),
+      s = params.get("service"),
+      pk = params.get("package");
+    if (p) {
+      const v = pmap[p] || pmap[decodeURIComponent(p)];
+      if (v) sel.value = v;
+    }
+    if (s) sel.value = s;
+    if (pk) {
+      if (pk === "business") sel.value = "fleet";
+      else if (pk === "enterprise") sel.value = "full-package";
+    }
+  }
+
+  /* ── Hash scroll ── */
   if (window.location.hash) {
     setTimeout(() => {
-      const target = document.querySelector(window.location.hash);
-      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      const t = document.querySelector(window.location.hash);
+      if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 400);
+  }
+
+  /* ── Hero Carousel ── */
+  const slides = document.querySelectorAll(".hc-slide");
+  const dots = document.querySelectorAll(".hc-dot");
+  if (slides.length > 0) {
+    let current = 0,
+      timer = null;
+
+    function goTo(idx) {
+      slides[current].classList.remove("active");
+      dots[current] && dots[current].classList.remove("active");
+      current = (idx + slides.length) % slides.length;
+      slides[current].classList.add("active");
+      dots[current] && dots[current].classList.add("active");
+
+      /* handle video slide */
+      slides.forEach((s, i) => {
+        const vid = s.querySelector("video");
+        if (vid) {
+          if (i === current) {
+            vid.currentTime = 0;
+            vid.play();
+          } else vid.pause();
+        }
+      });
+    }
+
+    function startAuto() {
+      clearInterval(timer);
+      timer = setInterval(() => goTo(current + 1), 10000);
+    }
+
+    document.querySelector(".hc-prev") &&
+      document.querySelector(".hc-prev").addEventListener("click", () => {
+        goTo(current - 1);
+        startAuto();
+      });
+    document.querySelector(".hc-next") &&
+      document.querySelector(".hc-next").addEventListener("click", () => {
+        goTo(current + 1);
+        startAuto();
+      });
+    dots.forEach((d, i) =>
+      d.addEventListener("click", () => {
+        goTo(i);
+        startAuto();
+      }),
+    );
+
+    goTo(0);
+    startAuto();
   }
 })();
