@@ -198,9 +198,32 @@
   /* ── Hero Carousel ── */
   const slides = document.querySelectorAll(".hc-slide");
   const dots = document.querySelectorAll(".hc-dot");
+  const progressBar = document.querySelector(".hc-progress-bar");
+  const progressDuration = 15000; // 15 seconds per slide
   if (slides.length > 0) {
     let current = 0,
-      timer = null;
+      timer = null,
+      progressFrame = null,
+      progressStart = null;
+
+    // Smoothly animate the progress bar from 0% to 100% over the slide duration.
+    function updateProgress(now) {
+      if (!progressBar || progressStart === null) return;
+      const elapsed = now - progressStart;
+      const pct = Math.min((elapsed / progressDuration) * 100, 100);
+      progressBar.style.width = `${pct}%`;
+      if (elapsed < progressDuration) {
+        progressFrame = requestAnimationFrame(updateProgress);
+      }
+    }
+
+    // Reset visual progress whenever the carousel changes slides or user interacts.
+    function resetProgress() {
+      if (progressFrame) cancelAnimationFrame(progressFrame);
+      if (progressBar) progressBar.style.width = "0%";
+      progressStart = performance.now();
+      progressFrame = requestAnimationFrame(updateProgress);
+    }
 
     function goTo(idx) {
       slides[current].classList.remove("active");
@@ -219,23 +242,34 @@
           } else vid.pause();
         }
       });
+
+      resetProgress();
     }
 
+    // Start or restart the auto-advance timer and keep progress bar in sync.
     function startAuto() {
       clearInterval(timer);
-      timer = setInterval(() => goTo(current + 1), 10000);
+      timer = setInterval(() => goTo(current + 1), progressDuration);
+      resetProgress();
     }
 
-    document.querySelector(".hc-prev") &&
-      document.querySelector(".hc-prev").addEventListener("click", () => {
+    const prevBtn = document.querySelector(".hc-prev");
+    const nextBtn = document.querySelector(".hc-next");
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
         goTo(current - 1);
         startAuto();
       });
-    document.querySelector(".hc-next") &&
-      document.querySelector(".hc-next").addEventListener("click", () => {
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
         goTo(current + 1);
         startAuto();
       });
+    }
+
     dots.forEach((d, i) =>
       d.addEventListener("click", () => {
         goTo(i);
