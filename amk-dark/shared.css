@@ -82,6 +82,7 @@ ul {
   justify-content: space-between;
   padding: 0 40px;
   background: rgba(9, 9, 9, 0.93);
+  -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--border);
   transition: var(--tr);
