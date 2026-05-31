@@ -29,13 +29,13 @@
     );
 
   /* ── Active nav link ── */
-  const pg = window.location.pathname.split("/").pop() || "index-dark.html";
+  const pg = window.location.pathname.split("/").pop() || "index.html";
   document.querySelectorAll(".nav-links a, .mnav a").forEach((a) => {
     const h = a.getAttribute("href") || "";
     if (
       h === pg ||
       h.split("#")[0] === pg ||
-      (pg === "" && h === "index-dark.html")
+      (pg === "" && h === "index.html")
     ) {
       a.classList.add("active");
     }
@@ -142,20 +142,20 @@
   });
 
   /* ── Contact form ── */
-  const cf = document.getElementById("cform");
-  if (cf) {
-    cf.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const btn = cf.querySelector("button[type=submit]");
-      btn.textContent = "SENDING...";
-      btn.disabled = true;
-      setTimeout(() => {
-        cf.style.display = "none";
-        const succ = document.getElementById("form-success");
-        if (succ) succ.style.display = "block";
-      }, 1200);
-    });
-  }
+  // const cf = document.getElementById("cform");
+  // if (cf) {
+  //   cf.addEventListener("submit", (e) => {
+  //     e.preventDefault();
+  //     const btn = cf.querySelector("button[type=submit]");
+  //     btn.textContent = "SENDING...";
+  //     btn.disabled = true;
+  //     setTimeout(() => {
+  //       cf.style.display = "none";
+  //       const succ = document.getElementById("form-success");
+  //       if (succ) succ.style.display = "block";
+  //     }, 1200);
+  //   });
+  // }
 
   /* ── Pre-fill contact form from URL ── */
   const params = new URLSearchParams(window.location.search);

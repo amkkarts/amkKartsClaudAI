@@ -134,6 +134,10 @@
       padding: 48px 0
     }
 
+    .failed {
+      display: none;
+    }
+
     .form-success .success-icon {
       font-size: 56px;
       margin-bottom: 16px
@@ -318,7 +322,7 @@
 <body>
 
   <nav class="nav">
-    <a href="index-dark.html" class="nav-logo">
+    <a href="index.html" class="nav-logo">
       <img src="assets/logo.png" alt="AMK">
       <div class="nav-logo-txt">
         <div class="n1">AMK KARTS</div>
@@ -326,7 +330,7 @@
       </div>
     </a>
     <ul class="nav-links">
-      <li><a href="index-dark.html">Home</a></li>
+      <li><a href="index.html">Home</a></li>
       <li><a href="products.html">Products</a></li>
       <li><a href="services.html">Services</a></li>
       <li><a href="about.html">About</a></li>
@@ -339,7 +343,7 @@
     <button class="ham" aria-label="Menu"><span></span><span></span><span></span></button>
   </nav>
   <nav class="mnav">
-    <a href="index-dark.html">Home</a><a href="products.html">Products</a><a href="services.html">Services</a><a
+    <a href="index.html">Home</a><a href="products.html">Products</a><a href="services.html">Services</a><a
       href="about.html">About</a><a href="contact.html">Contact</a>
     <div class="mnav-foot">
       <p style="color:var(--yellow);font-family:var(--fh);font-weight:700">+91 9610424888</p>
@@ -350,7 +354,7 @@
   <!-- PAGE HERO -->
   <div class="phero">
     <div class="wrap phero-in">
-      <p class="breadcrumb"><a href="index-dark.html">Home</a> › <span>Contact</span></p>
+      <p class="breadcrumb"><a href="index.html">Home</a> › <span>Contact</span></p>
       <h1>GET IN <span>TOUCH</span></h1>
       <p style="font-size:15px;color:var(--muted);margin-top:10px;max-width:480px">Ready to order a kart or build a
         track? Our team is here to help you get started.</p>
@@ -499,6 +503,14 @@
             <a href="products.html" class="btn btn-r" style="margin-top:24px;display:inline-flex"><span>BROWSE KARTS
                 →</span></a>
           </div>
+          <div class="form-success failed" id="failed">
+            <div class="success-icon">❌</div>
+            <h4>MESSAGE SENT FAILED!</h4>
+            <p>Sorry! Your message failed to send.<br>For urgent enquiries call <a href="tel:+919610424888"
+                style="color:var(--yellow)">+91 9610424888</a></p>
+            <a href="products.html" class="btn btn-r" style="margin-top:24px;display:inline-flex"><span>BROWSE KARTS
+                →</span></a>
+          </div>
         </div>
       </div>
     </div>
@@ -545,7 +557,7 @@
     <div class="wrap">
       <div class="footer-grid">
         <div class="fbrand">
-          <a href="index-dark.html" class="nav-logo" style="margin-bottom:16px;display:flex">
+          <a href="index.html" class="nav-logo" style="margin-bottom:16px;display:flex">
             <img src="assets/logo.png" alt="AMK">
             <div class="nav-logo-txt">
               <div class="n1">AMK KARTS</div>
@@ -607,6 +619,17 @@
   </footer>
 
   <script src="script.js"></script>
+
+  <!-- EmailJS Integration -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function () {
+      emailjs.init({
+        publicKey: "2ZM2rk-codGI90GmD",
+      });
+    })();
+  </script>
+
   <script>
     // Pre-fill form from URL params
     const params = new URLSearchParams(window.location.search);
@@ -631,16 +654,79 @@
       if (pkg) { if (pkg === 'business') sel.value = 'fleet'; else if (pkg === 'enterprise') sel.value = 'full-package'; }
     }
 
-    // Form submission
-    document.getElementById('cform')?.addEventListener('submit', function (e) {
+    // Form submission with EmailJS
+    const enquiryForm = document.getElementById('cform');
+    enquiryForm?.addEventListener('submit', function (e) {
       e.preventDefault();
-      const btn = this.querySelector('button[type=submit]');
-      btn.innerHTML = '<span>SENDING...</span>';
-      btn.disabled = true;
-      setTimeout(() => {
-        this.style.display = 'none';
-        document.getElementById('form-success').style.display = 'block';
-      }, 1200);
+
+      const submitBtn = this.querySelector('button[type=submit]');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>SENDING...</span>';
+
+      const formData = {
+        customer_name: document.getElementById('cform').querySelector('input[name="name"]').value.trim(),
+        customer_email: document.getElementById('cform').querySelector('input[name="email"]').value.trim(),
+        customer_mobile: document.getElementById('cform').querySelector('input[name="phone"]').value.trim(),
+        kart_category: document.getElementById('cform').querySelector('select[name="interest"]').value,
+        quantity: document.getElementById('cform').querySelector('select[name="quantity"]').value || 'Not specified',
+        customer_location: document.getElementById('cform').querySelector('input[name="location"]').value.trim(),
+        customer_message: document.getElementById('cform').querySelector('textarea[name="message"]').value.trim() || 'No message',
+      };
+
+      // Validation
+      if (!formData.customer_name || !formData.customer_mobile || !formData.kart_category) {
+        alert('Please fill all required fields');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (formData.customer_email && !emailRegex.test(formData.customer_email)) {
+        alert('Enter a valid email address');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        return;
+      }
+
+      if (formData.customer_mobile.replace(/\D/g, '').length < 10) {
+        alert('Enter a valid phone number (minimum 10 digits)');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        return;
+      }
+
+      // SEND EMAIL via EmailJS
+      emailjs
+        .send('service_gt44tfc', 'template_kevltr9', formData)
+
+        .then(function (response) {
+          console.log("response--before", response.status);
+          console.log('Email sent successfully', response);
+
+          if (response.status === 200) {
+            console.log("response--status", response.status);
+            // Show success message only on successful response
+            enquiryForm.style.display = 'none';
+            document.getElementById('form-success').style.display = 'block';
+
+            // Backup in localStorage
+            const enquiries = JSON.parse(localStorage.getItem('amkEnquiries') || '[]');
+            enquiries.push({ ...formData, time: new Date().toISOString() });
+            localStorage.setItem('amkEnquiries', JSON.stringify(enquiries));
+          } else {
+            throw new Error('Email service error: ' + response.status);
+          }
+        })
+        .catch(function (error) {
+          console.error('Email failed', error);
+          alert('Failed to send message. Please try again or contact us directly at +91 9610424888');
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+          enquiryForm.style.display = 'none';
+          document.getElementById('failed').style.display = 'block';
+        });
     });
   </script>
 </body>
