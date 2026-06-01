@@ -710,6 +710,7 @@
             // Show success message only on successful response
             enquiryForm.style.display = 'none';
             document.getElementById('form-success').style.display = 'block';
+            document.getElementById('failed').style.display = 'none';
 
             // Backup in localStorage
             const enquiries = JSON.parse(localStorage.getItem('amkEnquiries') || '[]');
@@ -725,6 +726,7 @@
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalText;
           enquiryForm.style.display = 'none';
+          document.getElementById('form-success').style.display = 'none';
           document.getElementById('failed').style.display = 'block';
         });
     });
