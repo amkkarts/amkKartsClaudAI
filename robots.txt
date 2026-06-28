@@ -1,0 +1,40 @@
+# AMK Industry - Search Engine Directives
+# For Google, Bing, Yahoo and other search engines
+
+# Allow all bots to crawl and index all content
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /.env
+Disallow: /.git
+Disallow: /node_modules
+
+# Specific directives for Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Specific directives for Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://amkkarts.com/sitemap.xml
+
+# Site-specific rules
+# Block specific file types that shouldn't be indexed
+Disallow: *.css$
+Disallow: *.js$
+Disallow: *.json$
+Disallow: *.pdf$
