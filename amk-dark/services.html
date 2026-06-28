@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Services — AMK Industry | Track Design, Construction & Kart Manufacturing</title>
+  <link rel="stylesheet" href="shared.css">
+  <link rel="icon" href="assets/logo.png">
+  <style>
+    /* SERVICE SECTIONS */
+    .srv-section {
+      padding: 80px 0;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .srv-section:last-of-type {
+      border-bottom: none
+    }
+
+    .srv-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center
+    }
+
+    .srv-2col.reverse {
+      direction: rtl
+    }
+
+    .srv-2col.reverse>* {
+      direction: ltr
+    }
+
+    .srv-visual {
+      height: 400px;
+      overflow: hidden;
+      background: var(--s2);
+      position: relative;
+      border: 1px solid var(--border)
+    }
+
+    .srv-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover
+    }
+
+    .srv-visual .overlay-tag {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: var(--red);
+      color: #fff;
+      font-family: var(--fh);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 14px
+    }
+
+    .srv-number-big {
+      font-family: var(--fd);
+      font-size: 130px;
+      line-height: 1;
+      color: rgba(255, 255, 255, .03);
+      position: absolute;
+      top: 0;
+      right: 0
+    }
+
+    /* PROCESS STEPS */
+    .process-sec {
+      padding: 80px 0;
+      background: var(--s1)
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      position: relative;
+      margin-top: 52px
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 32px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--red), var(--yellow));
+      z-index: 0
+    }
+
+    .step {
+      text-align: center;
+      padding: 0 16px;
+      position: relative;
+      z-index: 1
+    }
+
+    .step-num {
+      width: 64px;
+      height: 64px;
+      background: var(--bg);
+      border: 2px solid var(--red);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--fd);
+      font-size: 24px;
+      color: var(--yellow);
+      margin: 0 auto 16px
+    }
+
+    .step h4 {
+      font-family: var(--fh);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 8px
+    }
+
+    .step p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5
+    }
+
+    /* PACKAGES */
+    .pkg-sec {
+      padding: 80px 0;
+      background: var(--bg)
+    }
+
+    .pkg-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 48px
+    }
+
+    .pkg-card {
+      background: var(--s1);
+      border: 1px solid var(--border);
+      padding: 36px;
+      position: relative;
+      transition: var(--tr)
+    }
+
+    .pkg-card:hover {
+      border-color: rgba(227, 30, 36, .3);
+      transform: translateY(-4px)
+    }
+
+    .pkg-card.featured {
+      border-color: var(--yellow);
+      background: var(--s2)
+    }
+
+    .pkg-card.featured::before {
+      content: 'MOST POPULAR';
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--yellow);
+      color: var(--bg);
+      font-family: var(--fh);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 16px;
+      white-space: nowrap
+    }
+
+    .pkg-name {
+      font-family: var(--fd);
+      font-size: 28px;
+      letter-spacing: 2px;
+      margin-bottom: 6px
+    }
+
+    .pkg-sub {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 1px;
+      margin-bottom: 20px
+    }
+
+    .pkg-price {
+      font-family: var(--fd);
+      font-size: 22px;
+      color: var(--yellow);
+      margin-bottom: 24px
+    }
+
+    .pkg-ul {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 28px
+    }
+
+    .pkg-ul li {
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.5
+    }
+
+    .pkg-ul li::before {
+      content: '✓';
+      color: var(--red);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px
+    }
+
+    /* FAQ */
+    .faq-sec {
+      padding: 80px 0;
+      background: var(--s1)
+    }
+
+    .faq-list {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px
+    }
+
+    .faq-item {
+      background: var(--s2);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: border-color .2s
+    }
+
+    .faq-item.open {
+      border-color: rgba(227, 30, 36, .3)
+    }
+
+    .faq-q {
+      padding: 20px 24px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--fh);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      transition: color .2s;
+      -webkit-user-select: none;
+      user-select: none
+    }
+
+    .faq-q:hover {
+      color: var(--yellow)
+    }
+
+    .faq-item.open .faq-q {
+      color: var(--yellow)
+    }
+
+    .faq-icon {
+      font-size: 20px;
+      transition: transform .3s;
+      flex-shrink: 0;
+      margin-left: 16px;
+      color: var(--red)
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg)
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease, padding .35s ease
+    }
+
+    .faq-a.open {
+      max-height: 300px;
+      padding: 0 24px 20px
+    }
+
+    .faq-a p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7
+    }
+
+    @media(max-width:1024px) {
+      .srv-2col {
+        grid-template-columns: 1fr;
+        gap: 32px
+      }
+
+      .srv-2col.reverse {
+        direction: ltr
+      }
+
+      .steps {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px
+      }
+
+      .steps::before {
+        display: none
+      }
+
+      .pkg-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    @media(max-width:768px) {
+      .steps {
+        grid-template-columns: 1fr
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo.png" alt="AMK">
+      <div class="nav-logo-txt">
+        <div class="n1">AMK KARTS</div>
+        <div class="n2">Alle Möglichen Kraftfahrzeuge</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <span class="nav-phone">+91 9610424888</span>
+      <a href="contact.html" class="btn btn-r"><span>GET QUOTE</span></a>
+    </div>
+    <button class="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+  <nav class="mnav">
+    <a href="index.html">Home</a><a href="products.html">Products</a><a href="services.html">Services</a><a
+      href="about.html">About</a><a href="contact.html">Contact</a>
+    <div class="mnav-foot">
+      <p style="color:var(--yellow);font-family:var(--fh);font-weight:700">+91 9610424888</p>
+      <p>info@amkindustry.com</p>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="phero">
+    <div class="wrap phero-in">
+      <p class="breadcrumb"><a href="index.html">Home</a> › <span>Services</span></p>
+      <h1>OUR <span>SERVICES</span></h1>
+      <p style="font-size:15px;color:var(--muted);margin-top:10px;max-width:520px">Complete end-to-end solutions — from
+        single kart orders to designing and building your dream racing complex.</p>
+    </div>
+  </div>
+  <div class="race-stripe"></div>
+
+  <!-- SERVICE 1: MANUFACTURING -->
+  <section class="srv-section" id="manufacturing">
+    <div class="wrap">
+      <div class="srv-2col fu">
+        <div class="srv-visual">
+          <img src="assets/electric-single.png" alt="Kart Manufacturing">
+          <div class="overlay-tag">Kart Manufacturing</div>
+          <span class="srv-number-big">01</span>
+        </div>
+        <div>
+          <p class="tag">Service 01</p>
+          <h2 class="sh">KART <span>MANUFACTURING</span></h2>
+          <div class="redline"></div>
+          <p class="sdesc" style="margin-bottom:24px">From engineering to delivery, we build every kart with precision
+            craftsmanship. Choose from our catalogue or commission a fully bespoke design for your brand.</p>
+          <ul class="hlist" style="margin-bottom:28px">
+            <li>Electric Go-Karts (Single & Double Seater)</li>
+            <li>Petrol Go-Karts (Honda GX Series)</li>
+            <li>Custom colour, graphics & branding</li>
+            <li>Multiple seating configurations available</li>
+            <li>Kids Mode & Adult Mode programming</li>
+            <li>Smart BMS & connected car technology</li>
+            <li>1-year manufacturer warranty on all karts</li>
+            <li>After-sales support & spare parts supply</li>
+          </ul>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <a href="products.html" class="btn btn-r"><span>VIEW KART CATALOGUE →</span></a>
+            <a href="contact.html?service=manufacturing" class="btn btn-o">GET MANUFACTURING QUOTE</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE 2: TRACK DESIGN -->
+  <section class="srv-section" id="design">
+    <div class="wrap">
+      <div class="srv-2col reverse fu">
+        <div class="srv-visual">
+          <img src="assets/track1.png" alt="Track Design Service">
+          <div class="overlay-tag">Track Design</div>
+          <span class="srv-number-big">02</span>
+        </div>
+        <div>
+          <p class="tag">Service 02</p>
+          <h2 class="sh">TRACK <span>DESIGN</span></h2>
+          <div class="redline"></div>
+          <p class="sdesc" style="margin-bottom:24px">Our expert track architects transform any space into a world-class
+            racing circuit. We design for thrill, safety, and operational efficiency — every layout tailored to your
+            site and objectives.</p>
+          <ul class="hlist" style="margin-bottom:28px">
+            <li>Site survey & feasibility assessment</li>
+            <li>2D & 3D track layout design</li>
+            <li>Safety zone & run-off area planning</li>
+            <li>Tyre barrier & guardrail positioning</li>
+            <li>Pit lane & control room design</li>
+            <li>Spectator viewing area planning</li>
+            <li>Lighting & power infrastructure layout</li>
+            <li>FIM/CIK safety standard compliance</li>
+          </ul>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <a href="contact.html?service=design" class="btn btn-r"><span>REQUEST TRACK DESIGN →</span></a>
+            <a href="contact.html" class="btn btn-o">FREE CONSULTATION</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE 3: TRACK CONSTRUCTION -->
+  <section class="srv-section" id="construction">
+    <div class="wrap">
+      <div class="srv-2col fu">
+        <div class="srv-visual">
+          <img src="assets/track2.png" alt="Track Construction">
+          <div class="overlay-tag">Track Construction</div>
+          <span class="srv-number-big">03</span>
+        </div>
+        <div>
+          <p class="tag">Service 03</p>
+          <h2 class="sh">TRACK <span>CONSTRUCTION</span></h2>
+          <div class="redline"></div>
+          <p class="sdesc" style="margin-bottom:24px">We don't just design — we build. Our construction teams handle
+            everything from ground preparation to the finishing touches, delivering a track that's race-ready from day
+            one.</p>
+          <ul class="hlist" style="margin-bottom:28px">
+            <li>Full site preparation & earthworks</li>
+            <li>Asphalt track surface laying</li>
+            <li>Concrete kerbing & rumble strips</li>
+            <li>Tyre barrier & Armco guardrail installation</li>
+            <li>Pit building & infrastructure construction</li>
+            <li>Race control tower & timing systems</li>
+            <li>Flood lighting & electrical systems</li>
+            <li>Landscaping & spectator facilities</li>
+          </ul>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <a href="contact.html?service=construction" class="btn btn-r"><span>REQUEST CONSTRUCTION QUOTE →</span></a>
+            <a href="contact.html" class="btn btn-o">DISCUSS YOUR PROJECT</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS STEPS -->
+  <section class="process-sec">
+    <div class="wrap">
+      <p class="tag fu">How It Works</p>
+      <h2 class="sh fu">OUR <span>PROCESS</span></h2>
+      <div class="redline fu"></div>
+      <p class="sdesc fu">From first contact to track opening day — a smooth, transparent journey every step of the way.
+      </p>
+      <div class="steps fu">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h4>CONSULTATION</h4>
+          <p>Free initial consultation to understand your goals, site, and budget</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h4>PROPOSAL</h4>
+          <p>Detailed proposal with design concepts, specifications, and pricing</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h4>DESIGN & APPROVAL</h4>
+          <p>2D/3D layouts presented for your review and approval</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h4>BUILD & DELIVER</h4>
+          <p>Construction & manufacturing with milestone updates throughout</p>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <h4>HANDOVER</h4>
+          <p>Full handover with training, documentation, and support package</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGES -->
+  <section class="pkg-sec">
+    <div class="wrap">
+      <p class="tag fu">Packages</p>
+      <h2 class="sh fu">TURNKEY <span>SOLUTIONS</span></h2>
+      <div class="redline fu"></div>
+      <p class="sdesc fu">Whether you're starting small or building a full-scale motorsport venue, we have a package for
+        you.</p>
+      <div class="pkg-grid">
+        <div class="pkg-card fu">
+          <p class="pkg-name">STARTER</p>
+          <p class="pkg-sub">For Personal & Small Rental Use</p>
+          <p class="pkg-price">From ₹1,76,870</p>
+          <ul class="pkg-ul">
+            <li>1–5 Go-Karts (Electric or Petrol)</li>
+            <li>Standard colour options</li>
+            <li>Basic safety equipment package</li>
+            <li>1-Year warranty on all karts</li>
+            <li>Setup & commissioning support</li>
+            <li>Operator training manual</li>
+          </ul>
+          <a href="contact.html?package=starter" class="btn btn-o" style="width:100%;justify-content:center"><span>GET
+              STARTED →</span></a>
+        </div>
+        <div class="pkg-card featured fu d2">
+          <p class="pkg-name">BUSINESS</p>
+          <p class="pkg-sub">For Commercial Kart Track Operations</p>
+          <p class="pkg-price">Custom Quote</p>
+          <ul class="pkg-ul">
+            <li>5–20 Go-Karts (mixed fleet)</li>
+            <li>Full custom colours & branding</li>
+            <li>Track design consultation included</li>
+            <li>Safety barrier & signage package</li>
+            <li>Timing system integration</li>
+            <li>Priority after-sales support</li>
+            <li>Operator & staff training on-site</li>
+            <li>1-Year warranty + extended options</li>
+          </ul>
+          <a href="contact.html?package=business" class="btn btn-r" style="width:100%;justify-content:center"><span>GET
+              BUSINESS QUOTE →</span></a>
+        </div>
+        <div class="pkg-card fu d4">
+          <p class="pkg-name">ENTERPRISE</p>
+          <p class="pkg-sub">Full-Scale Track Build & Fleet</p>
+          <p class="pkg-price">Full Turnkey Quote</p>
+          <ul class="pkg-ul">
+            <li>20+ Go-Karts (full commercial fleet)</li>
+            <li>Complete track design & construction</li>
+            <li>Pit building & control room</li>
+            <li>Flood lighting & electrical systems</li>
+            <li>Race timing & management software</li>
+            <li>Spectator facilities & landscaping</li>
+            <li>Full branding & marketing signage</li>
+            <li>Ongoing maintenance partnership</li>
+          </ul>
+          <a href="contact.html?package=enterprise" class="btn btn-o"
+            style="width:100%;justify-content:center"><span>DISCUSS PROJECT →</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-sec">
+    <div class="wrap">
+      <p class="tag fu">Got Questions?</p>
+      <h2 class="sh fu">FREQUENTLY <span>ASKED</span></h2>
+      <div class="redline fu"></div>
+      <div class="faq-list fu">
+        <div class="faq-item">
+          <div class="faq-q">How long does it take to manufacture a kart?<span class="faq-icon">+</span></div>
+          <div class="faq-a">
+            <p>Standard karts from our catalogue are typically ready in 2–4 weeks from order confirmation. Custom karts
+              with unique colour schemes or special modifications may take 4–6 weeks. We'll provide a precise timeline
+              when you place your order.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Do you deliver karts across India?<span class="faq-icon">+</span></div>
+          <div class="faq-a">
+            <p>Yes, we deliver to all major cities and states across India. We handle packaging and freight logistics.
+              Delivery timelines and costs vary by location — contact us for a delivery quote to your specific address.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">What is the minimum order quantity for a commercial fleet?<span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            <p>There's no strict minimum — we welcome single-kart orders as well as bulk fleet orders. However, for
+              commercial operations we typically recommend a minimum of 5–8 karts for a viable kart track business. We
+              offer volume discounts for orders of 10 karts or more.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">How long does track construction take?<span class="faq-icon">+</span></div>
+          <div class="faq-a">
+            <p>Track construction timelines depend on the scale and complexity of the project. A small
+              indoor/entertainment track typically takes 4–8 weeks. A full outdoor racing circuit with pit facilities
+              can take 3–6 months. We provide detailed project timelines during the planning phase.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Do you offer after-sales service and spare parts?<span class="faq-icon">+</span></div>
+          <div class="faq-a">
+            <p>Yes. All karts come with a 1-year manufacturer warranty. We supply genuine spare parts and offer service
+              contracts for commercial operators. Our technical support team can assist remotely, and we can dispatch
+              service technicians for on-site repairs when needed.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Can I customise the kart colours and graphics?<span class="faq-icon">+</span></div>
+          <div class="faq-a">
+            <p>Absolutely. All AMK karts can be fully customised in your choice of colour and graphics. Whether you want
+              your business logo, a specific colour scheme, or a complete custom livery, our design team will work with
+              you to create exactly what you need.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section
+    style="padding:80px 0;background:linear-gradient(135deg,#140808,var(--bg));border-top:1px solid rgba(227,30,36,.2)">
+    <div class="wrap" style="text-align:center">
+      <p class="tag" style="justify-content:center">Ready to Start?</p>
+      <h2 class="sh" style="margin-bottom:16px">LET'S BUILD YOUR <span>DREAM TRACK</span></h2>
+      <p style="font-size:15px;color:var(--muted);max-width:480px;margin:0 auto 32px">Contact our team today for a free
+        consultation and personalised quote for your kart or track project.</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+        <a href="contact.html" class="btn btn-r"><span>GET FREE CONSULTATION →</span></a>
+        <a href="products.html" class="btn btn-o">VIEW KART CATALOGUE</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="fbrand">
+          <a href="index.html" class="nav-logo" style="margin-bottom:16px;display:flex">
+            <img src="assets/logo.png" alt="AMK">
+            <div class="nav-logo-txt">
+              <div class="n1">AMK KARTS</div>
+              <div class="n2">Alle Möglichen Kraftfahrzeuge</div>
+            </div>
+          </a>
+          <p>Driving innovation in electric mobility. Manufacturers of premium go-karts and builders of world-class
+            racing tracks across India.</p>
+          <div class="fsoc"><a href="#">FB</a><a href="#">IG</a><a href="#">YT</a><a href="#">LI</a></div>
+        </div>
+        <div class="fcol">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="products.html#electric-single">Electric Kart (Single)</a></li>
+            <li><a href="products.html#electric-double">Electric Kart (Double)</a></li>
+            <li><a href="products.html#petrol-single">Petrol Kart</a></li>
+            <li><a href="contact.html">Request Custom Kart</a></li>
+          </ul>
+        </div>
+        <div class="fcol">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#manufacturing">Kart Manufacturing</a></li>
+            <li><a href="#design">Track Design</a></li>
+            <li><a href="#construction">Track Construction</a></li>
+            <li><a href="contact.html">Get a Quote</a></li>
+          </ul>
+        </div>
+        <div class="fcol">
+          <h4>Contact</h4>
+          <div class="fci">
+            <div class="fci-icon">📞</div>
+            <div>
+              <p>Phone</p>
+              <p>+91 9610424888</p>
+            </div>
+          </div>
+          <div class="fci">
+            <div class="fci-icon">✉</div>
+            <div>
+              <p>Email</p>
+              <p>info@amkindustry.com</p>
+            </div>
+          </div>
+          <div class="fci">
+            <div class="fci-icon">🌐</div>
+            <div>
+              <p>Website</p>
+              <p>www.amkindustry.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fbot">
+        <p>© 2025 <span>AMK Industry</span>. All Rights Reserved.</p>
+        <p>Driving Passion. Delivering Performance.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.querySelector('.faq-q').addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-a').classList.remove('open'); });
+        if (!isOpen) { item.classList.add('open'); item.querySelector('.faq-a').classList.add('open'); }
+      });
+    });
+  </script>
+</body>
+
+</html>

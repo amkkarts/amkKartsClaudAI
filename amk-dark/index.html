@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>AMK Industry — Go-Kart Manufacturers | Track Design & Construction</title>
+  <meta name="description"
+    content="AMK Industry manufactures premium electric and petrol go-karts, golf carts, quad bikes, electric shuttles and builds world-class racing tracks across India.">
+  <link rel="stylesheet" href="shared.css">
+  <link rel="icon" href="assets/logo.png">
+  <style>
+    /* ═══════════════════════════════════
+   HERO CAROUSEL
+═══════════════════════════════════ */
+    .hero-carousel {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 76px);
+      overflow: hidden;
+      margin-top: 76px;
+    }
+
+    .hc-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1s ease;
+      pointer-events: none;
+    }
+
+    .hc-slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 2;
+    }
+
+    /* ── SLIDE 1: existing hero ── */
+    .slide-kart {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      height: 100%;
+      background: linear-gradient(135deg, #090909 55%, #0e0808);
+    }
+
+    .slide-kart::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(227, 30, 36, .018) 60px, rgba(227, 30, 36, .018) 61px);
+      pointer-events: none;
+    }
+
+    .hero-l {
+      position: relative;
+      z-index: 2;
+      padding: 60px 60px 60px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(245, 197, 24, .08);
+      border: 1px solid rgba(245, 197, 24, .2);
+      padding: 6px 16px;
+      font-family: var(--fh);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 22px;
+      width: fit-content;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--yellow);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: .5;
+        transform: scale(.8);
+      }
+    }
+
+    .hero-title {
+      font-family: var(--fd);
+      font-size: clamp(46px, 6vw, 90px);
+      line-height: .9;
+      letter-spacing: 3px;
+      margin-bottom: 6px;
+    }
+
+    .hero-title .l1 {
+      color: #fff;
+      display: block;
+    }
+
+    .hero-title .l2 {
+      color: var(--red);
+      display: block;
+    }
+
+    .hero-title .l3 {
+      color: var(--yellow);
+      display: block;
+      font-size: 50%;
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 400px;
+      line-height: 1.7;
+      margin: 20px 0 28px;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 24px;
+      margin-top: 36px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .hstat .hn {
+      font-family: var(--fd);
+      font-size: 24px;
+      color: var(--yellow);
+    }
+
+    .hstat .hl {
+      font-family: var(--fh);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-top: 2px;
+    }
+
+    .hero-r {
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    .hero-r img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero-r::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, #090909 0%, transparent 20%, transparent 80%, #090909 100%),
+        linear-gradient(0deg, #090909 0%, transparent 20%);
+      z-index: 2;
+    }
+
+    /* ── SLIDE 2: track video ── */
+    .slide-track {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #000;
+    }
+
+    .slide-track video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slide-track .track-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(0, 0, 0, .82) 0%, rgba(0, 0, 0, .45) 50%, rgba(0, 0, 0, .6) 100%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 80px;
+    }
+
+    .track-overlay .tov-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(227, 30, 36, .15);
+      border: 1px solid rgba(227, 30, 36, .4);
+      padding: 6px 16px;
+      font-family: var(--fh);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 24px;
+      width: fit-content;
+    }
+
+    .track-overlay .tov-tag .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
+      animation: pulse 1.5s infinite;
+      box-shadow: 0 0 8px rgba(227, 30, 36, .8);
+    }
+
+    .track-overlay h2 {
+      font-family: var(--fd);
+      font-size: clamp(40px, 6vw, 86px);
+      line-height: .95;
+      letter-spacing: 3px;
+      color: #fff;
+      max-width: 700px;
+      margin-bottom: 14px;
+    }
+
+    .track-overlay h2 span {
+      color: var(--red);
+    }
+
+    .track-overlay h2 em {
+      color: var(--yellow);
+      font-style: normal;
+    }
+
+    .track-overlay p {
+      font-size: 15px;
+      color: rgba(255, 255, 255, .7);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .track-stats {
+      display: flex;
+      gap: 0;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+
+    .tstat {
+      padding: 16px 28px 16px 0;
+      margin-right: 28px;
+      border-right: 1px solid rgba(255, 255, 255, .15);
+    }
+
+    .tstat:last-child {
+      border-right: none;
+    }
+
+    .tstat .tv {
+      font-family: var(--fd);
+      font-size: 32px;
+      color: var(--yellow);
+      line-height: 1;
+    }
+
+    .tstat .tl {
+      font-family: var(--fh);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .5);
+      margin-top: 4px;
+    }
+
+    .tov-btns {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* ── carousel controls ── */
+    .hc-controls {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hc-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .3);
+      border: 1px solid rgba(255, 255, 255, .4);
+      cursor: pointer;
+      transition: all .3s;
+    }
+
+    .hc-dot.active {
+      background: var(--red);
+      border-color: var(--red);
+      width: 28px;
+      border-radius: 5px;
+    }
+
+    .hc-prev,
+    .hc-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 20;
+      width: 44px;
+      height: 44px;
+      background: rgba(0, 0, 0, .5);
+      border: 1px solid rgba(255, 255, 255, .2);
+      color: #fff;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all .3s;
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+    }
+
+    .hc-prev:hover,
+    .hc-next:hover {
+      background: var(--red);
+      border-color: var(--red);
+    }
+
+    .hc-prev {
+      left: 20px;
+    }
+
+    .hc-next {
+      right: 20px;
+    }
+
+    /* progress bar */
+    .hc-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: rgba(255, 255, 255, .1);
+      z-index: 20;
+    }
+
+    .hc-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--red), var(--yellow));
+      width: 0%;
+      /* animation: progressFill 15s linear infinite; */
+    }
+
+    @keyframes progressFill {
+      from {
+        width: 0%;
+      }
+
+      to {
+        width: 100%;
+      }
+    }
+
+    /* ══ rest of homepage ══ */
+    .prod-sec {
+      padding: 96px 0;
+      background: var(--bg);
+    }
+
+    .prod-hd {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 52px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .stats-band {
+      background: var(--red);
+    }
+
+    .srv-sec {
+      padding: 96px 0;
+      background: var(--bg);
+    }
+
+    .srv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 52px;
+    }
+
+    .srv-blk {
+      background: var(--s1);
+      padding: 44px 36px;
+      position: relative;
+      overflow: hidden;
+      transition: var(--tr);
+    }
+
+    .srv-blk:hover {
+      background: var(--s2);
+    }
+
+    .srv-blk:hover::after {
+      opacity: 1;
+    }
+
+    .srv-blk::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(227, 30, 36, .04), transparent 60%);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    .srv-num {
+      font-family: var(--fd);
+      font-size: 70px;
+      line-height: 1;
+      color: rgba(255, 255, 255, .035);
+      position: absolute;
+      top: 16px;
+      right: 20px;
+    }
+
+    .srv-ico {
+      font-size: 32px;
+      margin-bottom: 18px;
+    }
+
+    .srv-blk h3 {
+      font-family: var(--fd);
+      font-size: 26px;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .srv-blk p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .srv-link {
+      font-family: var(--fh);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--yellow);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: gap .2s;
+      cursor: pointer;
+    }
+
+    .srv-link:hover {
+      gap: 16px;
+    }
+
+    /* BANGALORE TRACK FEATURE */
+    .blr-sec {
+      padding: 96px 0;
+      background: var(--s1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .blr-sec::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--red), var(--yellow));
+    }
+
+    .blr-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .blr-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 220px 180px;
+      gap: 12px;
+    }
+
+    .blr-img {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .blr-img.big {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+
+    .blr-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s;
+    }
+
+    .blr-img:hover img {
+      transform: scale(1.05);
+    }
+
+    .blr-live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(227, 30, 36, .15);
+      border: 1px solid var(--red);
+      padding: 5px 14px;
+      font-family: var(--fh);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 16px;
+    }
+
+    .blr-live-badge .ldot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      animation: pulse 1s infinite;
+      box-shadow: 0 0 8px rgba(227, 30, 36, .9);
+    }
+
+    .blr-features {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 24px 0 28px;
+    }
+
+    .blr-feat {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--s2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--red);
+    }
+
+    .blr-feat .bf-ico {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .blr-feat h5 {
+      font-family: var(--fh);
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .blr-feat p {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* WHY */
+    .why-sec {
+      padding: 96px 0;
+      background: var(--s1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why-sec::before {
+      content: '';
+      position: absolute;
+      right: -150px;
+      top: -150px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(227, 30, 36, .05), transparent 70%);
+    }
+
+    .why-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .why-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    /* IDEAL BAND */
+    .ideal-band {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ideal-inner {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .ideal-lbl {
+      font-family: var(--fh);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gray);
+      white-space: nowrap;
+    }
+
+    .pill {
+      font-family: var(--fd);
+      font-size: 18px;
+      letter-spacing: 3px;
+      color: var(--gray);
+      transition: color .2s;
+      cursor: default;
+    }
+
+    .pill:hover {
+      color: #fff;
+    }
+
+    /* CTA */
+    .cta-sec {
+      padding: 96px 0;
+      background: linear-gradient(135deg, #140808, var(--bg));
+      border-top: 1px solid rgba(227, 30, 36, .2);
+      position: relative;
+    }
+
+    .cta-sec::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: linear-gradient(180deg, var(--red), var(--yellow));
+    }
+
+    .cta-in {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 36px;
+      flex-wrap: wrap;
+    }
+
+    .cta-in h2 {
+      font-family: var(--fd);
+      font-size: clamp(34px, 5vw, 58px);
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+
+    .cta-in h2 span {
+      color: var(--red);
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 30px;
+      font-family: var(--fh);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+      transition: var(--tr);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-r {
+      background: var(--red);
+      color: #fff;
+    }
+
+    .btn-r::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--yellow);
+      transform: translateX(-105%);
+      transition: transform .3s ease;
+    }
+
+    .btn-r:hover::before {
+      transform: translateX(0);
+    }
+
+    .btn-r span,
+    .btn-o span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-o {
+      background: transparent;
+      color: #fff;
+      border: 1px solid var(--border2);
+    }
+
+    .btn-o:hover {
+      border-color: var(--yellow);
+      color: var(--yellow);
+      background: rgba(245, 197, 24, .05);
+    }
+
+    /* RACE STRIPE */
+    /* .race-stripe {
+      height: 5px;
+      background: linear-gradient(90deg, var(--red), var(--yellow), var(--red));
+    } */
+
+    @media(max-width:1024px) {
+      .slide-kart {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-l {
+        padding: 60px 24px 40px;
+      }
+
+      .track-overlay {
+        padding: 0 32px;
+      }
+
+      .prod-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .srv-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .why-2col {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .blr-inner {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .blr-gallery {
+        grid-template-rows: 200px 160px;
+      }
+    }
+
+    @media(max-width:768px) {
+      .prod-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats {
+        gap: 18px;
+      }
+
+      .stats-red-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .why-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .blr-gallery {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+
+      .blr-img.big {
+        grid-column: span 1;
+      }
+
+      .track-overlay {
+        padding: 0 24px;
+      }
+
+      .hc-prev,
+      .hc-next {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo.png" alt="AMK Industry">
+      <div class="nav-logo-txt">
+        <div class="n1">AMK KARTS</div>
+        <div class="n2">Alle Möglichen Kraftfahrzeuge</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <span class="nav-phone">+91 9610424888</span>
+      <a href="contact.html" class="btn btn-r"><span>GET QUOTE</span></a>
+    </div>
+    <button class="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+  <nav class="mnav">
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <div class="mnav-foot">
+      <p style="color:var(--yellow);font-family:var(--fh);font-weight:700;font-size:16px">+91 9610424888</p>
+      <p style="color:var(--muted);margin-top:4px">info@amkindustry.com</p>
+    </div>
+  </nav>
+
+  <!-- ═══════════════ HERO CAROUSEL ═══════════════ -->
+  <div class="hero-carousel">
+
+    <!-- SLIDE 1 — Kart Hero -->
+    <div class="hc-slide slide-kart active">
+      <div class="hero-l">
+        <div class="eyebrow"><span class="dot"></span>India's Premier EV Manufacturer</div>
+        <h1 class="hero-title">
+          <span class="l1">DRIVEN BY</span>
+          <span class="l2">PASSION</span>
+          <span class="l3">POWERED BY PERFORMANCE</span>
+        </h1>
+        <p class="hero-sub">AMK Industry engineers world-class go-karts, golf carts &amp; electric vehicles — and builds
+          championship-grade tracks. We deliver the thrill.</p>
+        <div class="hero-btns">
+          <a href="products.html" class="btn btn-r"><span>EXPLORE PRODUCTS →</span></a>
+          <a href="services.html#design" class="btn btn-o">TRACK SOLUTIONS</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hstat">
+            <div class="hn">7+</div>
+            <div class="hl">Product Lines</div>
+          </div>
+          <div class="hstat">
+            <div class="hn">60<span style="font-size:14px">km/h</span></div>
+            <div class="hl">Top Speed</div>
+          </div>
+          <div class="hstat">
+            <div class="hn">100%</div>
+            <div class="hl">Customisable</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-r">
+        <img src="assets/hero-banner.png" alt="AMK Electric Kart">
+      </div>
+    </div>
+
+    <!-- SLIDE 2 — Track Video -->
+    <div class="hc-slide slide-track">
+      <video autoplay muted loop playsinline src="assets/track-video.mp4"></video>
+      <div class="track-overlay">
+        <div class="tov-tag"><span class="live-dot"></span>Live Project</div>
+        <h2>NEXT-GEN<br><span>KARTING</span> TRACK<br></h2>
+        <p>India's most advanced multi-level karting arena — featuring a spiral overpass, ultra-fast straights, LED-lit
+          barriers, and a world-class pit complex. Designed and built by AMK Industry.</p>
+        <div class="track-stats">
+          <div class="tstat">
+            <div class="tv">1.2<span style="font-size:18px">km</span></div>
+            <div class="tl">Track Length</div>
+          </div>
+          <div class="tstat">
+            <div class="tv">2</div>
+            <div class="tl">Levels</div>
+          </div>
+          <div class="tstat">
+            <div class="tv">LED</div>
+            <div class="tl">Lit Barriers</div>
+          </div>
+          <div class="tstat">
+            <div class="tv">2025</div>
+            <div class="tl">Opening Year</div>
+          </div>
+        </div>
+        <div class="tov-btns">
+          <a href="services.html#bangalore" class="btn btn-r"><span>VIEW PROJECT →</span></a>
+          <a href="contact.html?service=track-design" class="btn btn-o">BUILD YOUR TRACK</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <button class="hc-prev" aria-label="Previous">&#8592;</button>
+    <button class="hc-next" aria-label="Next">&#8594;</button>
+    <div class="hc-controls">
+      <div class="hc-dot active"></div>
+      <div class="hc-dot"></div>
+    </div>
+    <div class="hc-progress">
+      <div class="hc-progress-bar"></div>
+    </div>
+  </div>
+
+  <!-- <div class="race-stripe"></div> -->
+
+  <!-- PRODUCTS PREVIEW -->
+  <section class="prod-sec">
+    <div class="wrap">
+      <div class="prod-hd">
+        <div>
+          <p class="tag fu">Our Fleet</p>
+          <h2 class="sh fu">ENGINEERED TO <span>THRILL</span></h2>
+          <div class="redline fu"></div>
+          <p class="sdesc fu">Seven product lines — from racing go-karts and vintage golf carts to off-road quads and
+            electric shuttles. All built for performance.</p>
+        </div>
+        <a href="products.html" class="btn btn-o fu" style="flex-shrink:0">VIEW ALL PRODUCTS →</a>
+      </div>
+
+      <div class="prod-grid">
+        <!-- Electric Single Kart -->
+        <div class="kcard fu">
+          <div class="kimg"><img src="assets/electric-single.png" alt="Electric Kart Single">
+            <div class="badge">ZERO EMISSION</div>
+          </div>
+          <div class="kbd">
+            <p class="ktype">⚡ Electric · Single Seater</p>
+            <h3>SUPER AUTOMATIC ELECTRIC KART</h3>
+            <div class="specs2">
+              <div class="spec-item"><label>Motor</label>
+                <value>1500 W</value>
+              </div>
+              <div class="spec-item"><label>Top Speed</label>
+                <value>60 km/h</value>
+              </div>
+              <div class="spec-item"><label>Battery</label>
+                <value>60V 45Ah</value>
+              </div>
+              <div class="spec-item"><label>Range</label>
+                <value>40 km</value>
+              </div>
+            </div>
+            <div class="price-row">
+              <div class="price-big">₹1,87,500<small>GST EXTRA</small></div>
+              <a href="products.html#electric-single" class="btn btn-r"><span>DETAILS</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Petrol Kart -->
+        <div class="kcard fu d2">
+          <div class="kimg"><img src="assets/petrol-single1.png" alt="Petrol Kart">
+            <div class="badge" style="background:#444">PETROL</div>
+          </div>
+          <div class="kbd">
+            <p class="ktype">⛽ Petrol · Single Seater</p>
+            <h3>SUPER SINGLE-SEATER PETROL KART</h3>
+            <div class="specs2">
+              <div class="spec-item"><label>Engine</label>
+                <value>200cc Honda</value>
+              </div>
+              <div class="spec-item"><label>Gearbox</label>
+                <value>CVT Auto</value>
+              </div>
+              <div class="spec-item"><label>Brakes</label>
+                <value>Hydraulic</value>
+              </div>
+              <div class="spec-item"><label>Tyres</label>
+                <value>Tubeless</value>
+              </div>
+            </div>
+            <div class="price-row">
+              <div class="price-big">₹1,76,870<small>EX-FACTORY + TAXES</small></div>
+              <a href="products.html#petrol-single" class="btn btn-r"><span>DETAILS</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Electric Double Kart -->
+        <div class="kcard fu d4">
+          <div class="kimg"><img src="assets/electric-double.png" alt="Electric Kart Double">
+            <div class="badge">DUAL SEAT</div>
+          </div>
+          <div class="kbd">
+            <p class="ktype">⚡ Electric · Double Seater</p>
+            <h3>SUPER AUTOMATIC ELECTRIC KART</h3>
+            <div class="specs2">
+              <div class="spec-item"><label>Motor</label>
+                <value>2000 W</value>
+              </div>
+              <div class="spec-item"><label>Top Speed</label>
+                <value>60 km/h</value>
+              </div>
+              <div class="spec-item"><label>Battery</label>
+                <value>60V 45Ah</value>
+              </div>
+              <div class="spec-item"><label>Range</label>
+                <value>45 km</value>
+              </div>
+            </div>
+            <div class="price-row">
+              <div class="price-big">₹2,16,000<small>GST EXTRA</small></div>
+              <a href="products.html#electric-double" class="btn btn-r"><span>DETAILS</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Golf Cart 6S -->
+        <div class="kcard fu">
+          <div class="kimg"><img src="assets/e-golf-cart.png" alt="Electric Golf Cart 6 Seater">
+            <div class="badge">6 SEATER</div>
+          </div>
+          <div class="kbd">
+            <p class="ktype">⚡ Electric Golf Cart</p>
+            <h3>ELECTRIC GOLF CART 6 SEATER</h3>
+            <div class="specs2">
+              <div class="spec-item"><label>Motor</label>
+                <value>5000 W</value>
+              </div>
+              <div class="spec-item"><label>Speed</label>
+                <value>25–30 km/h</value>
+              </div>
+              <div class="spec-item"><label>Battery</label>
+                <value>48V 120Ah</value>
+              </div>
+              <div class="spec-item"><label>Range</label>
+                <value>60 km</value>
+              </div>
+            </div>
+            <div class="price-row">
+              <div class="price-big">₹4,28,570<small>+ TAXES</small></div>
+              <a href="products.html#golf-cart-6s" class="btn btn-r"><span>DETAILS</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vintage Golf Cart -->
+        <div class="kcard fu d2">
+          <div class="kimg"><img src="assets/vintage-golf-cart.png" alt="Vintage Golf Cart">
+            <div class="badge" style="background:#8B6914">VINTAGE</div>
+          </div>
+          <div class="kbd">
+            <p class="ktype">⚡ Vintage Golf Cart</p>
+            <h3>VINTAGE GOLF CART 6 SEATER</h3>
+            <div class="specs2">
+              <div class="spec-item"><label>Motor</label>
+                <value>5000 W AC</value>
+              </div>
+              <div class="spec-item"><label>Speed</label>
+                <value>25–30 km/h</value>
+              </div>
+              <div class="spec-item"><label>Battery</label>
+                <value>48V 120Ah</value>
+              </div>
+              <div class="spec-item"><label>Range</label>
+                <value>60 km</value>
+              </div>
+            </div>
+            <div class="price-row">
+              <div class="price-big">₹5,98,740<small>+ TAXES</small></div>
+              <a href="products.html#vintage-golf-cart" class="btn btn-r"><span>DETAILS</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cyber Quad -->
+        <div class="kcard fu d4">
+          <div class="kimg"><img src="assets/cyber-quad-group.png" alt="AMK Cyber Quad 4x4">
+            <div class="badge" style="background:#1a1a1a;border:1px solid #444">4×4</div>
+          </div>
+          <div class="kbd">
+            <p class="ktype">⚡ Electric · ATV / Quad</p>
+            <h3>AMK CYBER QUAD 4×4</h3>
+            <div class="specs2">
+              <div class="spec-item"><label>Motors</label>
+                <value>1500W×2</value>
+              </div>
+              <div class="spec-item"><label>Top Speed</label>
+                <value>62 km/h</value>
+              </div>
+              <div class="spec-item"><label>Range</label>
+                <value>80 km</value>
+              </div>
+              <div class="spec-item"><label>Drive</label>
+                <value>4×4 On Fly</value>
+              </div>
+            </div>
+            <div class="price-row">
+              <div class="price-big">₹4,28,570<small>+ TAXES</small></div>
+              <a href="products.html#cyber-quad" class="btn btn-r"><span>DETAILS</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- View all row -->
+      <div style="text-align:center;margin-top:40px">
+        <a href="products.html#electric-shuttle" class="btn btn-o" style="margin-right:14px"><span>⚡ VIEW ELECTRIC
+            SHUTTLE 11S →</span></a>
+        <a href="products.html" class="btn btn-r"><span>ALL PRODUCTS</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-band">
+    <div class="stats-red-inner wrap-wide">
+      <div class="sbox">
+        <div class="sn" data-t="500" data-s="+">0+</div>
+        <div class="sl">Vehicles Manufactured</div>
+      </div>
+      <div class="sbox">
+        <div class="sn" data-t="50" data-s="+">0+</div>
+        <div class="sl">Tracks Built</div>
+      </div>
+      <div class="sbox">
+        <div class="sn" data-t="7" data-s="+">0+</div>
+        <div class="sl">Product Lines</div>
+      </div>
+      <div class="sbox">
+        <div class="sn" data-t="100" data-s="%">0%</div>
+        <div class="sl">Customisable</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BANGALORE TRACK PROJECT FEATURE -->
+  <section class="blr-sec">
+    <div class="wrap">
+      <div class="blr-inner">
+        <div>
+          <div class="blr-live-badge"><span class="ldot"></span>Ongoing Project · 2025</div>
+          <p class="tag">Premium Project Spotlight</p>
+          <h2 class="sh">BANGALORE<br><span>KARTING ARENA</span></h2>
+          <div class="redline"></div>
+          <p class="sdesc" style="margin-bottom:24px">Track 1.0 — India's most advanced next-generation karting arena
+            under construction in Bangalore. A multi-level circuit with a spiral overpass, ultra-fast straights and full
+            LED lighting infrastructure.</p>
+          <div class="blr-features">
+            <div class="blr-feat">
+              <div class="bf-ico">🌀</div>
+              <div>
+                <h5>Spiral Overpass</h5>
+                <p>Elevated turns delivering next-level thrills — a first in India</p>
+              </div>
+            </div>
+            <div class="blr-feat">
+              <div class="bf-ico">💡</div>
+              <div>
+                <h5>Full LED Infrastructure</h5>
+                <p>LED-lit barriers, signage and lighting across the entire circuit</p>
+              </div>
+            </div>
+            <div class="blr-feat">
+              <div class="bf-ico">🏁</div>
+              <div>
+                <h5>Start/Finish Complex</h5>
+                <p>Race control tower, pit lane, timing systems and briefing zones</p>
+              </div>
+            </div>
+            <div class="blr-feat">
+              <div class="bf-ico">⚡</div>
+              <div>
+                <h5>AMK Electric Fleet Ready</h5>
+                <p>Designed to run full AMK electric kart fleet at commercial scale</p>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <a href="services.html#bangalore" class="btn btn-r"><span>FULL PROJECT DETAILS →</span></a>
+            <a href="contact.html?service=track-design" class="btn btn-o">BUILD YOUR TRACK</a>
+          </div>
+        </div>
+        <div class="blr-gallery fu">
+          <div class="blr-img big"><img src="assets/track2.png" alt="Bangalore Track Aerial"></div>
+          <div class="blr-img"><img src="assets/track1.png" alt="Track Design 3D"></div>
+          <div class="blr-img"><img src="assets/next-gen-track.jpg" alt="Track Map"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="srv-sec">
+    <div class="wrap">
+      <p class="tag fu">What We Offer</p>
+      <h2 class="sh fu">FULL-SERVICE <span>EV</span> SOLUTIONS</h2>
+      <div class="redline fu"></div>
+      <p class="sdesc fu">From a single kart to designing and building an entire racing complex — AMK is your end-to-end
+        partner in electric mobility.</p>
+      <div class="srv-grid">
+        <div class="srv-blk fu">
+          <span class="srv-num">01</span>
+          <div class="srv-ico">🏎️</div>
+          <h3>VEHICLE MANUFACTURING</h3>
+          <p>Custom electric karts, golf carts, quad bikes and electric shuttles built to your exact specification with
+            full branding options.</p>
+          <a href="services.html#manufacturing" class="srv-link">Learn More →</a>
+        </div>
+        <div class="srv-blk fu d2">
+          <span class="srv-num">02</span>
+          <div class="srv-ico">📐</div>
+          <h3>TRACK DESIGN</h3>
+          <p>Expert track architects create thrilling, safety-compliant layouts for resorts, parks, and competitive
+            venues — with 3D renders.</p>
+          <a href="services.html#design" class="srv-link">Learn More →</a>
+        </div>
+        <div class="srv-blk fu d4">
+          <span class="srv-num">03</span>
+          <div class="srv-ico">🏗️</div>
+          <h3>TRACK CONSTRUCTION</h3>
+          <p>End-to-end construction management with quality materials, LED infrastructure, safety systems, and on-time
+            delivery across India.</p>
+          <a href="services.html#construction" class="srv-link">Learn More →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" style="height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent)">
+  </div>
+
+  <!-- WHY AMK -->
+  <section class="why-sec">
+    <div class="wrap">
+      <div class="why-2col">
+        <div>
+          <p class="tag fu">Why Choose Us</p>
+          <h2 class="sh fu">BUILT FOR <span>PERFORMANCE</span></h2>
+          <div class="redline fu"></div>
+          <p class="sdesc fu" style="margin-bottom:26px">AMK combines engineering excellence with motorsport passion.
+            Every vehicle is crafted for maximum performance, safety, and longevity.</p>
+          <ul class="hlist fu">
+            <li>Strong &amp; Durable Tubular Steel Chassis</li>
+            <li>Hydraulic Disc Braking System</li>
+            <li>Smart BMS with Connected Car Technology</li>
+            <li>Premium Alloy Wheels &amp; Tubeless Tyres</li>
+            <li>Kids &amp; Adult Ride Modes Available</li>
+            <li>Full Colour &amp; Graphic Customisation</li>
+            <li>1 Year Manufacturer Warranty</li>
+            <li>Pan-India Delivery &amp; After-Sales Support</li>
+          </ul>
+          <a href="about.html" class="btn btn-o" style="margin-top:28px;display:inline-flex">ABOUT AMK INDUSTRY →</a>
+        </div>
+        <div class="why-cards fu">
+          <div class="fcard">
+            <div class="ficon">⚡</div>
+            <h4>ZERO EMISSION</h4>
+            <p>Clean electric power — no fumes, no noise pollution, maximum fun.</p>
+          </div>
+          <div class="fcard">
+            <div class="ficon">🛡️</div>
+            <h4>SAFETY FIRST</h4>
+            <p>Multi-layer safety: disc brakes, seat belts, smart BMS protection.</p>
+          </div>
+          <div class="fcard">
+            <div class="ficon">🔧</div>
+            <h4>LOW MAINTENANCE</h4>
+            <p>Engineered for reliability with minimal downtime and service costs.</p>
+          </div>
+          <div class="fcard">
+            <div class="ficon">💹</div>
+            <h4>HIGH ROI</h4>
+            <p>Robust, revenue-generating assets built for commercial operations.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IDEAL BAND -->
+  <div class="ideal-band">
+    <div class="wrap">
+      <div class="ideal-inner">
+        <span class="ideal-lbl">Ideal For</span>
+        <span class="pill">GO-KART TRACKS</span>
+        <span class="pill">RESORTS</span>
+        <span class="pill">GOLF COURSES</span>
+        <span class="pill">AMUSEMENT PARKS</span>
+        <span class="pill">CAMPUSES</span>
+        <span class="pill">RENTAL BUSINESS</span>
+        <span class="pill">CORPORATE EVENTS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta-sec">
+    <div class="wrap">
+      <div class="cta-in">
+        <div>
+          <p class="tag">Start Your Journey</p>
+          <h2>READY TO <span>RACE</span>?<br>LET'S BUILD TOGETHER.</h2>
+        </div>
+        <div class="cta-btns">
+          <a href="contact.html" class="btn btn-r"><span>GET A FREE QUOTE →</span></a>
+          <a href="products.html" class="btn btn-o">VIEW CATALOGUE</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="fbrand">
+          <a href="index.html" class="nav-logo" style="margin-bottom:16px;display:flex">
+            <img src="assets/logo.png" alt="AMK">
+            <div class="nav-logo-txt">
+              <div class="n1">AMK KARTS</div>
+              <div class="n2">Alle Möglichen Kraftfahrzeuge</div>
+            </div>
+          </a>
+          <p>Driving innovation in electric mobility. Manufacturers of premium go-karts, golf carts &amp; electric
+            vehicles — and builders of world-class racing tracks across India.</p>
+          <div class="fsoc"><a href="#">FB</a><a href="#">IG</a><a href="#">YT</a><a href="#">LI</a></div>
+        </div>
+        <div class="fcol">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="products.html#electric-single">Electric Kart (Single)</a></li>
+            <li><a href="products.html#electric-double">Electric Kart (Double)</a></li>
+            <li><a href="products.html#petrol-single">Petrol Kart</a></li>
+            <li><a href="products.html#golf-cart-6s">Golf Cart 6 Seater</a></li>
+            <li><a href="products.html#vintage-golf-cart">Vintage Golf Cart</a></li>
+            <li><a href="products.html#cyber-quad">Cyber Quad 4×4</a></li>
+            <li><a href="products.html#electric-shuttle">Electric Shuttle</a></li>
+          </ul>
+        </div>
+        <div class="fcol">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="services.html#bangalore">Bangalore Project</a></li>
+            <li><a href="services.html#design">Track Design</a></li>
+            <li><a href="contact.html">Get a Quote</a></li>
+          </ul>
+        </div>
+        <div class="fcol">
+          <h4>Contact</h4>
+          <div class="fci">
+            <div class="fci-icon">📞</div>
+            <div>
+              <p>Phone</p>
+              <p>+91 9610424888</p>
+            </div>
+          </div>
+          <div class="fci">
+            <div class="fci-icon">✉</div>
+            <div>
+              <p>Email</p>
+              <p>info@amkindustry.com</p>
+            </div>
+          </div>
+          <div class="fci">
+            <div class="fci-icon">🌐</div>
+            <div>
+              <p>Website</p>
+              <p>www.amkindustry.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fbot">
+        <p>© 2025 <span>AMK Industry</span>. All Rights Reserved. | Alle Möglichen Kraftfahrzeuge Industry</p>
+        <p>Driving Passion. Delivering Performance.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
