@@ -72,7 +72,7 @@
 
 ✅ Every page has canonical URL:
 
-- Home: https://amkkarts.com/index.html
+- Home: https://amkkarts.com/
 - Products: https://amkkarts.com/products.html
 - Services: https://amkkarts.com/services.html
 - About: https://amkkarts.com/about.html

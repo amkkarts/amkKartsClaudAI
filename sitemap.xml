@@ -1,155 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/css" href="https://www.xml-sitemaps.com/css/sitemap.css"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:fo="http://www.w3.org/1999/XSL/Format"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
-<url>
-  <loc>https://amkkarts.com/</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/index.html</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/products.html</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/services.html</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/about.html</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?service=track-design</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?product=Electric+Kart+Single</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?product=Electric+Kart+Single&amp;type=quote</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?product=Petrol+Kart+Single</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?product=Petrol+Kart+Single&amp;type=quote</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?product=Electric+Kart+Double</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?product=Electric+Kart+Double&amp;type=quote</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?product=Electric+Kart+Double&amp;type=custom</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?product=Golf+Cart+6S</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?product=Golf+Cart+6S&amp;type=quote</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?product=Vintage+Golf+Cart</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?product=Vintage+Golf+Cart&amp;type=quote</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?product=Cyber+Quad</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?product=Cyber+Quad&amp;type=quote</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?product=Electric+Shuttle</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?product=Electric+Shuttle&amp;type=quote</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?service=manufacturing</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?service=design</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?service=construction</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?package=starter</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?package=business</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://amkkarts.com/contact.html?package=enterprise</loc>
-  <lastmod>2026-06-28T16:39:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://amkkarts.com/</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://amkkarts.com/products.html</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://amkkarts.com/services.html</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://amkkarts.com/about.html</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://amkkarts.com/contact.html</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
